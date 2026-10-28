@@ -59,6 +59,7 @@ export function Footer() {
           <PawPrint aria-hidden className="size-3.5 text-foreground" />
         </p>
       </div>
+      <p className="border-t border-line px-4 py-3 text-center text-[0.65rem] text-muted">{hu.footer.credit}</p>
     </footer>
   );
 }
