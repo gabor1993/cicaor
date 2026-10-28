@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* Palette from the design: #24271D #4E513A #D9C9A8 #F6F3EC #B8A491 */
+/* Light is the design's theme and always the default. Values were sampled from the design mockup. */
+:root {
+  color-scheme: light;
+  --background: #f5f4ed;
+  --foreground: #24271d;
+  --muted: #5a5d4a;
+  --card: #f8f7f2;
+  --line: #e6e2d6;
+  --accent: #4e513a;
+  --on-accent: #f6f3ec;
+  --sand: #d9c9a8;
+  --taupe: #b8a491;
+  --band: #ebe6dc;
+  --band-cta: #eadfd1;
+  --footer: #24271d;
+  --on-footer: #f6f3ec;
+}
+
+/* Dark mode is opt-in only (set data-theme="dark" on <html>); it no longer follows the OS setting. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #181a13;
+  --foreground: #f6f3ec;
+  --muted: #c4bfae;
+  --card: #20231a;
+  --line: #3a3d2e;
+  --accent: #d9c9a8;
+  --on-accent: #24271d;
+  --band: #2a2d21;
+  --band-cta: #2a2d21;
+  --footer: #101109;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-sand: var(--sand);
+  --color-taupe: var(--taupe);
+  --color-band: var(--band);
+  --color-band-cta: var(--band-cta);
+  --color-footer: var(--footer);
+  --color-on-footer: var(--on-footer);
+  --font-sans: var(--font-lato), system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-script: var(--font-caveat), cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* keeps anchored sections below the sticky header */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
