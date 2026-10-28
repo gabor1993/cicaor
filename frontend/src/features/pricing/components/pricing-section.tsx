@@ -1,0 +1,32 @@
+import { SectionHeading } from "@/components/ui/section-heading";
+import { hu } from "@/content/hu";
+import { AddOnsGrid } from "./add-ons-grid";
+import { MultiDayStrip } from "./multi-day-strip";
+import { PricingCard } from "./pricing-card";
+
+export function PricingSection() {
+  const { packages } = hu;
+
+  return (
+    <section id="csomagok" aria-labelledby="packages-title" className="px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto flex max-w-6xl flex-col gap-16">
+        <div>
+          <SectionHeading
+            id="packages-title"
+            eyebrow={packages.eyebrow}
+            title={packages.title}
+            subtitle={packages.subtitle}
+            lines
+          />
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {packages.items.map((pkg, index) => (
+              <PricingCard key={pkg.id} pkg={pkg} tone={(index % 3) as 0 | 1 | 2} />
+            ))}
+          </div>
+        </div>
+        <MultiDayStrip />
+        <AddOnsGrid />
+      </div>
+    </section>
+  );
+}
