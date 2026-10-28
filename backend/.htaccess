@@ -1,0 +1,4 @@
+# Never serve the secrets file
+<Files ".env">
+    Require all denied
+</Files>
