@@ -18,8 +18,8 @@ export function PricingSection() {
             lines
           />
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
-            {packages.items.map((pkg, index) => (
-              <PricingCard key={pkg.id} pkg={pkg} tone={(index % 3) as 0 | 1 | 2} />
+            {packages.items.map((pkg) => (
+              <PricingCard key={pkg.id} pkg={pkg} />
             ))}
           </div>
         </div>

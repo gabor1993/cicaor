@@ -72,7 +72,7 @@ export const hu = {
           "Rövid beszámoló fotóval",
         ],
         popular: false,
-        imageAlt: "Cirmos cica pihen egy kényelmes takarón",
+        imageAlt: "Fekete-fehér cica pihen egy puha, világos takarón",
       },
       {
         id: "moka",
@@ -88,7 +88,7 @@ export const hu = {
           "Részletesebb napi beszámoló",
         ],
         popular: true,
-        imageAlt: "Vörös cica tollas játékkal játszik",
+        imageAlt: "Fekete-fehér cica egy fa játéklabdát figyel",
       },
       {
         id: "lux",
@@ -104,7 +104,7 @@ export const hu = {
           "Részletesebb beszámoló és több fénykép",
         ],
         popular: false,
-        imageAlt: "Szürke cica az ablak előtt nyugszik",
+        imageAlt: "Fekete-fehér cica heverészik egy puha, mályvaszínű takarón",
       },
     ],
   },

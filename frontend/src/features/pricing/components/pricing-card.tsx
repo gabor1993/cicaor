@@ -1,16 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { CalendarDays, Check, ChevronDown, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
-import { hu, type Duration } from "@/content/hu";
+import { hu, type Duration, type PackageId } from "@/content/hu";
 import { contactLinkFor, formatPrice, priceFor } from "../lib/pricing";
 import { DurationSelector } from "./duration-selector";
 
 type PricingPackage = (typeof hu.packages.items)[number];
 
-export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 2 }) {
+const images: Record<PackageId, string> = {
+  komfort: "/images/package-komfort.webp",
+  moka: "/images/package-moka.webp",
+  lux: "/images/package-lux.webp",
+};
+
+export function PricingCard({ pkg }: { pkg: PricingPackage }) {
   const [duration, setDuration] = useState<Duration>(60);
   const copy = hu.packages;
   const { multiDay } = hu;
@@ -24,7 +30,14 @@ export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 
       }`}
     >
       <div className="relative">
-        <PhotoPlaceholder alt={pkg.imageAlt} tone={tone} className="aspect-[4/3] rounded-lg" />
+        <Image
+          src={images[pkg.id]}
+          alt={pkg.imageAlt}
+          width={800}
+          height={600}
+          sizes="(min-width: 1024px) 33vw, 100vw"
+          className="aspect-[4/3] w-full rounded-lg object-cover"
+        />
         {pkg.popular && (
           <span className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-accent px-3 py-1 text-xs font-bold text-on-accent">
             {copy.popular}
