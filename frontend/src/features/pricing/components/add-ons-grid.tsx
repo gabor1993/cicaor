@@ -1,4 +1,4 @@
-import { Cat, CalendarDays, ChevronDown, CirclePlus, Clock, MapPin, Zap, type LucideIcon } from "lucide-react";
+import { Cat, CalendarDays, ChevronDown, MapPin, Zap, type LucideIcon } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 
@@ -6,9 +6,7 @@ const icons: Record<(typeof hu.addOns.items)[number]["icon"], LucideIcon> = {
   cat: Cat,
   calendar: CalendarDays,
   "map-pin": MapPin,
-  clock: Clock,
   zap: Zap,
-  plus: CirclePlus,
 };
 
 export function AddOnsGrid() {
@@ -30,11 +28,14 @@ export function AddOnsGrid() {
           <span className="hidden group-open:inline">{addOns.hide}</span>
           <ChevronDown aria-hidden className="size-4 transition group-open:rotate-180" />
         </summary>
-        <ul className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {addOns.items.map((item) => {
             const Icon = icons[item.icon];
             return (
-              <li key={item.id} className="flex flex-col items-center gap-2 bg-card p-6 text-center">
+              <li
+                key={item.id}
+                className="flex flex-col items-center gap-2 bg-card p-6 text-center"
+              >
                 <Icon aria-hidden className="size-8 text-accent" strokeWidth={1.25} />
                 <h3 className="font-serif text-lg">{item.name}</h3>
                 <p className="text-sm">

@@ -74,7 +74,7 @@ export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 
 
         <p className="flex items-center gap-2 border-t border-line pt-4 text-xs text-muted">
           <PawPrint aria-hidden className="size-4 shrink-0" />
-          {copy.recommended}
+          {copy.bookable}
         </p>
 
         <ButtonLink
