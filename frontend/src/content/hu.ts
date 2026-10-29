@@ -353,9 +353,9 @@ export const hu = {
   },
   footer: {
     rights: "Minden jog fenntartva.",
-    credit: "Weboldal készítés: GABENIX",
+    credit: "Developed by GABENIX",
     script: "Egy kis törődés, nagy nyugalom.",
-    social: { facebook: "Facebook", instagram: "Instagram", email: "E-mail" },
+    social: { facebook: "Facebook", email: "E-mail" },
   },
 } as const;
 

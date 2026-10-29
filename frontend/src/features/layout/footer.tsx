@@ -2,7 +2,9 @@ import { AnchorLink } from "@/components/ui/anchor-link";
 import { PawPrint } from "lucide-react";
 import { hu } from "@/content/hu";
 
-// lucide-react v1 dropped brand icons, so these two are drawn inline.
+const developerUrl = "https://gabenix.hu";
+
+// lucide-react v1 dropped brand icons, so this one is drawn inline.
 function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg aria-hidden viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -11,21 +13,8 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className}>
-      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" />
-    </svg>
-  );
-}
-
-// TODO: replace the placeholder social links with the real profiles.
-const social = [
-  { label: hu.footer.social.facebook, href: "#", Icon: FacebookIcon },
-  { label: hu.footer.social.instagram, href: "#", Icon: InstagramIcon },
-] as const;
+// TODO: replace the placeholder social link with the real profile.
+const social = [{ label: hu.footer.social.facebook, href: "#", Icon: FacebookIcon }] as const;
 
 export function Footer() {
   return (
@@ -59,7 +48,11 @@ export function Footer() {
           <PawPrint aria-hidden className="size-3.5 text-foreground" />
         </p>
       </div>
-      <p className="border-t border-line px-4 py-3 text-center text-[0.65rem] text-muted">{hu.footer.credit}</p>
+      <p className="border-t border-line px-4 py-3 text-center text-[0.65rem] text-muted">
+        <a href={developerUrl} className="underline-offset-2 hover:text-foreground hover:underline">
+          {hu.footer.credit}
+        </a>
+      </p>
     </footer>
   );
 }
