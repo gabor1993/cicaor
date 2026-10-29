@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Heart, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { hu } from "@/content/hu";
 
 export function HomeHero() {
@@ -8,7 +8,16 @@ export function HomeHero() {
 
   return (
     <section aria-labelledby="home-hero-title" className="relative isolate overflow-hidden">
-      <PhotoPlaceholder alt={homeHero.imageAlt} tone={1} className="absolute inset-0 -z-20 size-full" />
+      {/* The hero photo is the LCP element, so it loads eagerly with high priority. */}
+      <Image
+        src="/images/hero.webp"
+        alt={homeHero.imageAlt}
+        fill
+        sizes="100vw"
+        loading="eager"
+        fetchPriority="high"
+        className="-z-20 object-cover object-[70%_center]"
+      />
       {/* Darkens the left side so the white text meets WCAG AA contrast on any photo. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 

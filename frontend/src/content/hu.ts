@@ -38,7 +38,7 @@ export const hu = {
     body: "Megbízható, szeretetteljes gondoskodás a te cicádnak, amíg te távol vagy.",
     cta: "Szolgáltatások megtekintése",
     script: "Boldog cicák, nyugodt gazdik.",
-    imageAlt: "Cirmos cica pihen egy puha, kötött takarón",
+    imageAlt: "Fekete-fehér cica pihen egy puha takarón",
   },
   features: [
     {
