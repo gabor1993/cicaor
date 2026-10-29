@@ -49,8 +49,9 @@ export function Footer() {
         </p>
       </div>
       <p className="border-t border-line px-4 py-3 text-center text-[0.65rem] text-muted">
-        <a href={developerUrl} className="underline-offset-2 hover:text-foreground hover:underline">
-          {hu.footer.credit}
+        {hu.footer.creditPrefix}{" "}
+        <a href={developerUrl} className="font-bold underline-offset-2 hover:text-foreground hover:underline">
+          {hu.footer.creditName}
         </a>
       </p>
     </footer>
