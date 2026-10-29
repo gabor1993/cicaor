@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ArrowRight, Plus } from "lucide-react";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 
@@ -14,7 +14,14 @@ export function FaqSection() {
   return (
     <section id="gyik" aria-labelledby="faq-title" className="px-4 py-4 sm:px-6">
       <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-12">
-        <PhotoPlaceholder alt={faq.imageAlt} tone={0} className="hidden aspect-[5/3] lg:col-span-3 lg:flex" />
+        <Image
+          src="/images/faq.webp"
+          alt={faq.imageAlt}
+          width={640}
+          height={384}
+          sizes="25vw"
+          className="hidden aspect-[5/3] w-full object-cover lg:col-span-3 lg:block"
+        />
 
         <div className="lg:col-span-4 lg:border-r lg:border-line lg:pr-8">
           <Eyebrow>{faq.eyebrow}</Eyebrow>

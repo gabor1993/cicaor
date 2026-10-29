@@ -284,7 +284,7 @@ export const hu = {
     body: "Összegyűjtöttük a leggyakrabban felmerülő kérdéseket, hogy könnyebben dönthess, és nyugodt szívvel bízd rám a cicádat.",
     showAll: "Teljes kérdéssor",
     showLess: "Kevesebb kérdés",
-    imageAlt: "Cirmos cica pihen egy kötött takarón",
+    imageAlt: "Fekete-fehér cica fekszik egy kötött takarón",
     items: [
       {
         q: "Meddig előre érdemes foglalni?",
