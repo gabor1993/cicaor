@@ -3,9 +3,7 @@ import { AboutSection } from "@/features/home/about-section";
 import { ClosingBand } from "@/features/home/closing-band";
 import { FaqSection } from "@/features/home/faq-section";
 import { FeatureStrip } from "@/features/home/feature-strip";
-import { GalleryBand } from "@/features/home/gallery-band";
 import { HomeHero } from "@/features/home/home-hero";
-import { ReviewsSection } from "@/features/home/reviews-section";
 import { ServicesSection } from "@/features/home/services-section";
 import { Footer } from "@/features/layout/footer";
 import { Header } from "@/features/layout/header";
@@ -21,8 +19,7 @@ export default function Home() {
           <AboutSection />
         </div>
         <ServicesSection />
-        <GalleryBand />
-        <ReviewsSection />
+        {/* GalleryBand and ReviewsSection stay hidden until real client photos and reviews exist. */}
         <div className="border-t border-line py-6">
           <FaqSection />
         </div>

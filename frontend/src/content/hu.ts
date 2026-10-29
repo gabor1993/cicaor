@@ -24,8 +24,6 @@ export const hu = {
       { href: "/#rolam", label: "Rólam" },
       { href: "/#szolgaltatasok", label: "Szolgáltatások" },
       { href: "/arak/", label: "Árak" },
-      { href: "/#galeria", label: "Galéria" },
-      { href: "/#velemenyek", label: "Vélemények" },
       { href: "/#gyik", label: "Gyakori kérdések" },
       { href: "/#kapcsolat", label: "Kapcsolat" },
     ],
