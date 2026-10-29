@@ -146,9 +146,9 @@ export const hu = {
         id: "longer",
         icon: "clock",
         name: "Hosszabb látogatás",
-        price: "+1 000 Ft",
+        price: "+1 000 / 1 500 / 2 000 Ft",
         unit: "/ 15 perc",
-        note: "A csomagidőn túli, minden megkezdett 15 perc.",
+        note: "CicaKomfort / CicaMóka / CicaLux – a lefoglalt időn túli minden megkezdett 15 perc.",
       },
       {
         id: "urgent",
