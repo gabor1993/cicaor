@@ -18,7 +18,7 @@ const social = [{ label: hu.footer.social.facebook, href: "#", Icon: FacebookIco
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-background">
+    <footer className="border-t border-line bg-background print:hidden">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
         <nav aria-label={hu.nav.footerLabel}>
           <ul className="flex flex-wrap gap-x-4 gap-y-2 xl:gap-x-7">

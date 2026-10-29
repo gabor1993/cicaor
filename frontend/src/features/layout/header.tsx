@@ -27,7 +27,7 @@ export function Header() {
   const { nav } = hu;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur">
+    <header className="sticky top-0 z-40 print:hidden border-b border-line bg-card/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2.5 sm:px-6">
         <Logo />
 

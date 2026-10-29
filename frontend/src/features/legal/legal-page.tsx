@@ -19,9 +19,7 @@ function Block({ block }: { block: LegalBlock }) {
 export function LegalPage({ document }: { document: LegalDocument }) {
   return (
     <>
-      <div className="print:hidden">
-        <Header />
-      </div>
+      <Header />
       <main id="tartalom">
         <header className="bg-band px-4 py-14 sm:px-6 sm:py-20">
           <div className="mx-auto max-w-5xl">
@@ -88,9 +86,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
           </article>
         </div>
       </main>
-      <div className="print:hidden">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
