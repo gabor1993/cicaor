@@ -161,7 +161,17 @@ export const hu = {
         unit: "/ látogatás",
         note: "24 órán belüli foglalás esetén.",
       },
+      {
+        id: "extras",
+        icon: "plus",
+        name: "Egyéb teendők",
+        price: "+1 000 Ft",
+        unit: "/ látogatás",
+        note: "Növények öntözése, levelek, egyedi igények – megbeszélés szerint.",
+      },
     ],
+    show: "Felárak megjelenítése",
+    hide: "Felárak elrejtése",
   },
   ctaBand: {
     title: "Kérdésed van az árakkal kapcsolatban?",
