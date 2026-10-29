@@ -48,12 +48,30 @@ export function Footer() {
           <PawPrint aria-hidden className="size-3.5 text-foreground" />
         </p>
       </div>
-      <p className="border-t border-line px-4 py-3 text-center text-[0.65rem] text-muted">
-        {hu.footer.creditPrefix}{" "}
-        <a href={developerUrl} className="font-bold underline-offset-2 hover:text-foreground hover:underline">
-          {hu.footer.creditName}
-        </a>
-      </p>
+      <div className="border-t border-line">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-3 text-[0.65rem] text-muted sm:flex-row sm:justify-between sm:px-6">
+          <nav aria-label={hu.footer.legal.label}>
+            <ul className="flex gap-4">
+              <li>
+                <AnchorLink href="/adatkezelesi-tajekoztato/" className="hover:text-foreground hover:underline">
+                  {hu.footer.legal.privacy}
+                </AnchorLink>
+              </li>
+              <li>
+                <AnchorLink href="/aszf/" className="hover:text-foreground hover:underline">
+                  {hu.footer.legal.terms}
+                </AnchorLink>
+              </li>
+            </ul>
+          </nav>
+          <p>
+            {hu.footer.creditPrefix}{" "}
+            <a href={developerUrl} className="font-bold underline-offset-2 hover:text-foreground hover:underline">
+              {hu.footer.creditName}
+            </a>
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }

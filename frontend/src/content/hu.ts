@@ -333,7 +333,12 @@ export const hu = {
       packageNone: "Még nem döntöttem el",
       duration: "Látogatás hossza",
       message: "Üzenet",
-      consent: "Elfogadom, hogy a megadott adataimat a megkeresés megválaszolásához kezelik.",
+      consent: {
+        before: "Elolvastam az",
+        link: "adatkezelési tájékoztatót",
+        newTab: "(új lapon nyílik meg)",
+        after: ", és hozzájárulok, hogy a megadott adataimat a megkeresés megválaszolásához kezeljék.",
+      },
     },
     submit: "Üzenet küldése",
     sending: "Küldés…",
@@ -350,6 +355,7 @@ export const hu = {
   },
   footer: {
     rights: "Minden jog fenntartva.",
+    legal: { label: "Jogi információk", privacy: "Adatkezelési tájékoztató", terms: "ÁSZF" },
     creditPrefix: "Developed by",
     creditName: "GABENIX",
     script: "Egy kis törődés, nagy nyugalom.",

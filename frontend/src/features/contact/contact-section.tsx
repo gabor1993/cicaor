@@ -170,7 +170,20 @@ export function ContactSection() {
         <div className="sm:col-span-2">
           <label className="flex items-start gap-2 text-sm">
             <input name="consent" type="checkbox" className="mt-1" {...fieldProps("consent")} />
-            {contact.fields.consent}
+            <span>
+              {contact.fields.consent.before}{" "}
+              {/* A new tab keeps what the visitor has already typed into the form. */}
+              <a
+                href="/adatkezelesi-tajekoztato/"
+                target="_blank"
+                rel="noopener"
+                className="font-bold underline underline-offset-2 hover:text-accent"
+              >
+                {contact.fields.consent.link}
+                <span className="sr-only"> {contact.fields.consent.newTab}</span>
+              </a>
+              {contact.fields.consent.after}
+            </span>
           </label>
           {fieldError("consent")}
         </div>
