@@ -173,11 +173,6 @@ export const hu = {
     show: "Felárak megjelenítése",
     hide: "Felárak elrejtése",
   },
-  ctaBand: {
-    title: "Kérdésed van az árakkal kapcsolatban?",
-    body: "Írj nekünk bátran, szívesen segítünk a számodra legjobb csomag kiválasztásában!",
-    cta: "Kapcsolatfelvétel",
-  },
   about: {
     eyebrow: "Rólam",
     titleLines: ["Szívvel-lélekkel", "a cicákért"],

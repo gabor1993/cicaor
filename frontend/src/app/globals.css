@@ -14,7 +14,6 @@
   --sand: #d9c9a8;
   --taupe: #b8a491;
   --band: #ebe6dc;
-  --band-cta: #eadfd1;
   --footer: #24271d;
   --on-footer: #f6f3ec;
 }
@@ -30,7 +29,6 @@
   --accent: #d9c9a8;
   --on-accent: #24271d;
   --band: #2a2d21;
-  --band-cta: #2a2d21;
   --footer: #101109;
 }
 
@@ -45,7 +43,6 @@
   --color-sand: var(--sand);
   --color-taupe: var(--taupe);
   --color-band: var(--band);
-  --color-band-cta: var(--band-cta);
   --color-footer: var(--footer);
   --color-on-footer: var(--on-footer);
   --font-sans: var(--font-lato), system-ui, sans-serif;

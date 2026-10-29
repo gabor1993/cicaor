@@ -7,7 +7,6 @@ import { HomeHero } from "@/features/home/home-hero";
 import { ServicesSection } from "@/features/home/services-section";
 import { Footer } from "@/features/layout/footer";
 import { Header } from "@/features/layout/header";
-import { CtaBand } from "@/features/pricing/components/cta-band";
 import { PricingSection } from "@/features/pricing/components/pricing-section";
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
         </div>
         <ServicesSection />
         <PricingSection />
-        <CtaBand />
         {/* GalleryBand and ReviewsSection stay hidden until real client photos and reviews exist. */}
         <div className="border-t border-line py-6">
           <FaqSection />
