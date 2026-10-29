@@ -286,19 +286,37 @@ export const hu = {
     showLess: "Kevesebb kérdés",
     imageAlt: "Cirmos cica pihen egy kötött takarón",
     items: [
-      { q: "Meddig előre érdemes foglalni?", a: "TODO: Válasz a foglalási időről." },
+      {
+        q: "Meddig előre érdemes foglalni?",
+        a: "Érdemes legalább 1–2 héttel előre jelezni, iskolai szünetek és ünnepek idején még korábban. Ha sürgős, írj bátran: ha van szabad időpontom, megoldjuk.",
+      },
       {
         q: "Mi történik, ha a cicám beteg vagy különleges ellátást igényel?",
-        a: "TODO: Válasz a különleges ellátásról.",
+        a: "Szívesen adok gyógyszert vagy követek speciális étrendet a megbeszéltek szerint. Előre egyeztetjük a teendőket és az állatorvos elérhetőségét, hogy szükség esetén azonnal intézkedni tudjak.",
       },
-      { q: "Hogyan zajlik a kapcsolat a látogatások alatt?", a: "TODO: Válasz a kapcsolattartásról." },
-      { q: "Milyen felszerelést biztosítok?", a: "TODO: Válasz a felszerelésről." },
-      { q: "Hány cicára tudok vigyázni egyszerre?", a: "TODO: Válasz a cicák számáról." },
+      {
+        q: "Hogyan zajlik a kapcsolat a látogatások alatt?",
+        a: "Minden látogatás után fotót és rövid üzenetet küldök arról, hogy van a cicád. Ha bármi szokatlant tapasztalok, azonnal jelzem.",
+      },
+      {
+        q: "Milyen felszerelést biztosítok?",
+        a: "Az eledelt, az almot és a megszokott játékokat te biztosítod, hogy a cicád semmiben ne lássa a változást. A takarításhoz szükséges eszközöket én hozom.",
+      },
+      {
+        q: "Hány cicára tudok vigyázni egyszerre?",
+        a: "Egy háztartásban legfeljebb 3 cicáról gondoskodom egy látogatás alatt. Ennél több cica esetén kérj egyedi ajánlatot.",
+      },
     ],
     // Shown after "Teljes kérdéssor" is pressed.
     moreItems: [
-      { q: "TODO: További kérdés", a: "TODO: Válasz." },
-      { q: "TODO: További kérdés", a: "TODO: Válasz." },
+      {
+        q: "Hogyan történik a kulcsátadás?",
+        a: "A kulcsot az ismerkedő találkozón veszem át, és a megbeszélt módon adom vissza. A kulcson nem szerepel a címed, és senkinek nem adom tovább.",
+      },
+      {
+        q: "Van lehetőség ismerkedő találkozóra az első látogatás előtt?",
+        a: "Igen, az első látogatás előtt ingyenesen ellátogatok hozzátok, hogy megismerjem a cicádat, és átbeszéljük a teendőket.",
+      },
     ],
   },
   closing: {
