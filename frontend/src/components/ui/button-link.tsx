@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/anchor-link";
 import { ArrowRight } from "lucide-react";
 
 type Variant = "solid" | "outline" | "light" | "outlineLight";
@@ -11,7 +11,7 @@ const variants: Record<Variant, string> = {
   outlineLight: "border border-[#f6f3ec] text-[#f6f3ec] hover:bg-[#f6f3ec] hover:text-[#24271d]",
 };
 
-type ButtonLinkProps = ComponentPropsWithoutRef<typeof Link> & {
+type ButtonLinkProps = ComponentPropsWithoutRef<typeof AnchorLink> & {
   variant?: Variant;
   arrow?: boolean;
 };
@@ -24,12 +24,12 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   return (
-    <Link
+    <AnchorLink
       className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold transition ${variants[variant]} ${className}`}
       {...props}
     >
       {children}
       {arrow && <ArrowRight aria-hidden className="size-4" />}
-    </Link>
+    </AnchorLink>
   );
 }

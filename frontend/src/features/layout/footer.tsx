@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/anchor-link";
 import { PawPrint } from "lucide-react";
 import { hu } from "@/content/hu";
 
@@ -35,12 +35,12 @@ export function Footer() {
           <ul className="flex flex-wrap gap-x-4 gap-y-2 xl:gap-x-7">
             {hu.nav.items.map((item) => (
               <li key={item.href}>
-                <Link
+                <AnchorLink
                   href={item.href}
                   className="whitespace-nowrap text-[0.6rem] uppercase tracking-[0.12em] text-muted hover:text-foreground xl:text-[0.65rem]"
                 >
                   {item.label}
-                </Link>
+                </AnchorLink>
               </li>
             ))}
           </ul>

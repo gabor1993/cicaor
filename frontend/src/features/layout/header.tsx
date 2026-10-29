@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/anchor-link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
@@ -29,7 +29,7 @@ export function Header() {
               const active = isActive(item.href, pathname);
               return (
                 <li key={item.href}>
-                  <Link
+                  <AnchorLink
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={`whitespace-nowrap border-b py-1 text-[0.72rem] transition hover:text-accent xl:text-[0.8rem] ${
@@ -37,7 +37,7 @@ export function Header() {
                     }`}
                   >
                     {item.label}
-                  </Link>
+                  </AnchorLink>
                 </li>
               );
             })}
@@ -68,14 +68,14 @@ export function Header() {
           <ul className="flex flex-col gap-1">
             {nav.items.map((item) => (
               <li key={item.href}>
-                <Link
+                <AnchorLink
                   href={item.href}
                   onClick={() => setOpen(false)}
                   aria-current={isActive(item.href, pathname) ? "page" : undefined}
                   className="block rounded-lg px-3 py-3 text-base aria-[current=page]:font-bold"
                 >
                   {item.label}
-                </Link>
+                </AnchorLink>
               </li>
             ))}
           </ul>
