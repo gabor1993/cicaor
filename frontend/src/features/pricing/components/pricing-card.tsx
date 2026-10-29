@@ -5,7 +5,7 @@ import { CalendarDays, Check, ChevronDown, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { hu, type Duration } from "@/content/hu";
-import { contactLinkFor, formatPrice, getVisitPrice } from "../lib/pricing";
+import { contactLinkFor, formatPrice, priceFor } from "../lib/pricing";
 import { DurationSelector } from "./duration-selector";
 
 type PricingPackage = (typeof hu.packages.items)[number];
@@ -45,13 +45,13 @@ export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 
 
         <div>
           <p className="font-display text-3xl">
-            {formatPrice(getVisitPrice(pkg.prices, duration))}{" "}
+            {formatPrice(priceFor(pkg.visitRate, duration))}{" "}
             <span className="font-sans text-sm text-muted">{copy.perVisit}</span>
           </p>
           <p className="mt-2 flex gap-2 text-sm">
             <CalendarDays aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
             <span>
-              {multiDay.label} <strong>{formatPrice(pkg.perNight)}</strong> {multiDay.perNight}{" "}
+              {multiDay.label} <strong>{formatPrice(priceFor(pkg.multiDayRate, duration))}</strong> {multiDay.perNight}{" "}
               <span className="whitespace-nowrap text-muted">{multiDay.visitsPerDay}</span>
             </span>
           </p>

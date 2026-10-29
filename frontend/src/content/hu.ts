@@ -1,5 +1,5 @@
 // All user-facing copy lives here so components stay free of hardcoded text.
-// Prices marked TODO are placeholders until the real 30/90 minute prices are known.
+// Package rates: "base" is the 30-minute price and "step" is added for every further 30 minutes.
 
 export const durations = [30, 60, 90] as const;
 export type Duration = (typeof durations)[number];
@@ -63,8 +63,8 @@ export const hu = {
         label: "Alapcsomag",
         name: "CicaKomfort",
         tagline: "Az alapvető szükségletek biztonságban.",
-        prices: { 30: 3000, 60: 4000, 90: 5500 }, // TODO: confirm 30/90 min prices
-        perNight: 4500,
+        visitRate: { base: 3000, step: 750 },
+        multiDayRate: { base: 2500, step: 300 },
         features: [
           "Etetés, friss víz",
           "Alomtisztítás",
@@ -79,8 +79,8 @@ export const hu = {
         label: "Komplett csomag",
         name: "CicaMóka",
         tagline: "Több idő, több figyelem, több közös játék.",
-        prices: { 30: 4300, 60: 5500, 90: 7000 }, // TODO: confirm 30/90 min prices
-        perNight: 6200,
+        visitRate: { base: 4000, step: 1300 },
+        multiDayRate: { base: 3500, step: 800 },
         features: [
           "Minden, ami a CicaKomfort csomagban van",
           "Hosszabb játék és foglalkozás",
@@ -95,8 +95,8 @@ export const hu = {
         label: "Prémium csomag",
         name: "CicaLux",
         tagline: "Több társaság, több nyugalom.",
-        prices: { 30: 6000, 60: 7500, 90: 9500 }, // TODO: confirm 30/90 min prices
-        perNight: 8500,
+        visitRate: { base: 4500, step: 1700 },
+        multiDayRate: { base: 4000, step: 1200 },
         features: [
           "Minden, ami a CicaMóka csomagban van",
           "Hosszabb látogatás, több játék",
@@ -111,7 +111,6 @@ export const hu = {
   multiDay: {
     label: "Többnapos távollétre:",
     perNight: "/ nap",
-    // TODO: state the visit length; at 60 minutes some daily rates exceed the single-visit price.
     visitsPerDay: "(1 látogatás/nap)",
   },
   addOns: {

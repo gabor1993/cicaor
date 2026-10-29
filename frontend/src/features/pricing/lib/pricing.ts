@@ -29,6 +29,9 @@ export function formatPrice(amount: number): string {
   return `${priceFormatter.format(amount).replace(/ /g, " ")} Ft`;
 }
 
-export function getVisitPrice(prices: Record<Duration, number>, duration: Duration): number {
-  return prices[duration];
+export type Rate = { base: number; step: number };
+
+/** Price of a visit: the 30-minute base plus one step for every further 30 minutes. */
+export function priceFor(rate: Rate, duration: Duration): number {
+  return rate.base + rate.step * (duration / 30 - 1);
 }
