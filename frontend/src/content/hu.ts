@@ -195,7 +195,7 @@ export const hu = {
     script: "A cicák mosolyt csalnak az életbe.",
     quote: "„Nem csak egy állat, hanem egy családtag.”",
     imageAlt: "Mosolygó cicaszitter átöleli a cirmos cicát",
-    quoteImageAlt: "Kék szemű, világos cirmos cica kíváncsian néz felfelé",
+    quoteImageAlt: "Fekete-fehér cica arca közelről, meleg fényben",
   },
   services: {
     eyebrow: "Szolgáltatások",
@@ -209,7 +209,7 @@ export const hu = {
         price: "4 000 Ft",
         unit: "/ alkalom",
         note: "(max. 1 cica)",
-        imageAlt: "Cirmos cica egy párnán pihen",
+        imageAlt: "Fekete-fehér cica sétál a nyitott ajtó mellett",
       },
       {
         icon: "cats",
@@ -218,7 +218,7 @@ export const hu = {
         price: "5 500 Ft",
         unit: "/ alkalom",
         note: "(2–3 cica)",
-        imageAlt: "Cica ül az ablakpárkányon egy képkeret mellett",
+        imageAlt: "Két fekete-fehér cica orrot érint az ablak előtt",
       },
       {
         icon: "calendar",
@@ -227,7 +227,7 @@ export const hu = {
         price: "Egyedi árajánlat",
         unit: "",
         note: "(pl. 7+ nap)",
-        imageAlt: "Cica alszik egy kötött takarón",
+        imageAlt: "Fekete-fehér cica pihen egy kötött takarón",
       },
       {
         icon: "plus",
@@ -236,7 +236,7 @@ export const hu = {
         price: "+ 1 000 Ft",
         unit: "/ alkalom",
         note: "(igény szerint)",
-        imageAlt: "Cica ül szobanövények között",
+        imageAlt: "Fekete-fehér cica fonalgombolyaggal játszik",
       },
     ],
   },

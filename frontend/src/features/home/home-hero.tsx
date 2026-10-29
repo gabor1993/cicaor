@@ -16,7 +16,7 @@ export function HomeHero() {
         sizes="100vw"
         loading="eager"
         fetchPriority="high"
-        className="-z-20 object-cover object-[70%_center]"
+        className="-z-20 object-cover object-[70%_30%]"
       />
       {/* Darkens the left side so the white text meets WCAG AA contrast on any photo. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />

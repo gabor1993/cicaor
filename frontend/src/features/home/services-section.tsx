@@ -1,14 +1,23 @@
+import Image from "next/image";
 import { CalendarDays, Cat, CirclePlus, House, PawPrint, type LucideIcon } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 
-const icons: Record<(typeof hu.services.items)[number]["icon"], LucideIcon> = {
+type ServiceKey = (typeof hu.services.items)[number]["icon"];
+
+const icons: Record<ServiceKey, LucideIcon> = {
   house: House,
   cats: Cat,
   calendar: CalendarDays,
   plus: CirclePlus,
+};
+
+const images: Record<ServiceKey, string> = {
+  house: "/images/service-daily-visit.webp",
+  cats: "/images/service-multiple-cats.webp",
+  calendar: "/images/service-long-absence.webp",
+  plus: "/images/service-extras.webp",
 };
 
 function PricingSummary() {
@@ -49,11 +58,18 @@ export function ServicesSection() {
         subtitle={services.subtitle}
       />
       <div className="mx-auto mt-6 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(4,1fr)_1.25fr]">
-        {services.items.map((item, index) => {
+        {services.items.map((item) => {
           const Icon = icons[item.icon];
           return (
             <article key={item.title} className="flex flex-col border border-line bg-card">
-              <PhotoPlaceholder alt={item.imageAlt} tone={(index % 3) as 0 | 1 | 2} className="aspect-[3/2]" />
+              <Image
+                src={images[item.icon]}
+                alt={item.imageAlt}
+                width={800}
+                height={533}
+                sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
+                className="aspect-[3/2] w-full object-cover"
+              />
               <div className="relative flex flex-1 flex-col px-4 pb-4 pt-8">
                 <span className="absolute -top-6 left-4 flex size-12 items-center justify-center rounded-full bg-card">
                   <Icon aria-hidden className="size-5" strokeWidth={1.5} />

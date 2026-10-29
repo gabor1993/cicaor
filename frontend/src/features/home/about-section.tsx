@@ -43,8 +43,8 @@ export function AboutSection() {
           <Image
             src="/images/about-quote.webp"
             alt={about.quoteImageAlt}
-            width={547}
-            height={365}
+            width={800}
+            height={600}
             sizes="(min-width: 1024px) 25vw, 100vw"
             className="aspect-[4/3] w-full object-cover"
           />
