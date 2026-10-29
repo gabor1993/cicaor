@@ -1,14 +1,20 @@
 "use client";
 
-import { useState, useSyncExternalStore, type FormEvent } from "react";
+import { Suspense, useEffect, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { durations, hu } from "@/content/hu";
 import { parseSelection, type PackageSelection } from "@/features/pricing/lib/pricing";
 import { contactSchema } from "./schema";
 
-function subscribeToHistory(onChange: () => void) {
-  window.addEventListener("popstate", onChange);
-  return () => window.removeEventListener("popstate", onChange);
+// A package chosen in the pricing section arrives in the URL. useSearchParams needs a Suspense
+// boundary in a static export, so only this reader is client-rendered, not the whole form.
+function UrlSelectionReader({ onSelect }: { onSelect: (selection: PackageSelection) => void }) {
+  const search = useSearchParams().toString();
+  useEffect(() => {
+    if (search) onSelect(parseSelection(search));
+  }, [search, onSelect]);
+  return null;
 }
 
 const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL ?? "/backend/contact.php";
@@ -21,11 +27,7 @@ const inputClass =
 
 export function ContactSection() {
   const { contact, packages } = hu;
-  // The package chosen on /arak arrives in the URL. During the static build there is no URL, so the
-  // server snapshot is "" and React fills in the real value after hydration without a mismatch.
-  const search = useSyncExternalStore(subscribeToHistory, () => window.location.search, () => "");
-  const [override, select] = useState<PackageSelection | null>(null);
-  const selection = override ?? parseSelection(search);
+  const [selection, select] = useState<PackageSelection>(() => parseSelection(""));
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
 
@@ -85,6 +87,9 @@ export function ContactSection() {
   return (
     <section id="kapcsolat" aria-labelledby="contact-title" className="px-4 py-16 sm:px-6 sm:py-20">
       <SectionHeading id="contact-title" eyebrow={contact.eyebrow} title={contact.title} subtitle={contact.subtitle} />
+      <Suspense fallback={null}>
+        <UrlSelectionReader onSelect={select} />
+      </Suspense>
 
       <form noValidate onSubmit={handleSubmit} className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
         <label className="text-sm sm:col-span-1">

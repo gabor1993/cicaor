@@ -17,7 +17,7 @@ describe("samePageHashTarget", () => {
 
   it("leaves new hashes and other pages to the router", () => {
     expect(samePageHashTarget("#kapcsolat", `${origin}/`)).toBeNull();
-    expect(samePageHashTarget("/#kapcsolat", `${origin}/arak/#kapcsolat`)).toBeNull();
-    expect(samePageHashTarget("/arak/", `${origin}/arak/`)).toBeNull();
+    expect(samePageHashTarget("/#kapcsolat", `${origin}/aszf/#kapcsolat`)).toBeNull();
+    expect(samePageHashTarget("/aszf/", `${origin}/aszf/`)).toBeNull();
   });
 });

@@ -2,8 +2,7 @@
 
 Website for a cat sitting service.
 
-- `/` – home page: hero, highlights, about, services with a price summary, gallery with lightbox, reviews, FAQ and the contact form.
-- `/arak/` – detailed pricing: packages with 30/60/90 minute visits, multi-day offers and add-ons. "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the contact form.
+- `/` – single page: hero, highlights, about, services, detailed pricing (`#arak`: packages with 30/60/90 minute visits, multi-day offers and add-ons), FAQ and the contact form. "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the contact form. The gallery and reviews sections are hidden until real content exists.
 
 - `frontend/` – Next.js (App Router, TypeScript strict, Tailwind CSS v4), static export (`output: "export"`).
 - `backend/` – small PHP endpoint (`contact.php`) that validates the contact form and sends an e-mail.

@@ -18,7 +18,7 @@ export function MultiDayStrip() {
             {multiDay.title}
           </h3>
           <p className="mt-2 text-sm text-muted">{multiDay.body}</p>
-          <ButtonLink href="/#kapcsolat" className="mt-4">
+          <ButtonLink href="#kapcsolat" className="mt-4">
             {multiDay.cta}
           </ButtonLink>
         </div>

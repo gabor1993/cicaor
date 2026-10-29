@@ -7,7 +7,7 @@ export function PricingHero() {
   const { hero } = hu;
 
   return (
-    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden">
+    <section aria-labelledby="pricing-hero-title" className="relative isolate overflow-hidden">
       <PhotoPlaceholder
         alt={hero.imageAlt}
         tone={1}
@@ -18,9 +18,9 @@ export function PricingHero() {
 
       <div className="mx-auto max-w-7xl px-4 py-20 text-[#f6f3ec] sm:px-6 sm:py-28 lg:py-36">
         <p className="text-xs font-bold uppercase tracking-[0.3em]">{hero.eyebrow}</p>
-        <h1 id="hero-title" className="mt-4 max-w-xl font-display text-5xl leading-tight sm:text-6xl">
+        <h2 id="pricing-hero-title" className="mt-4 max-w-xl font-display text-5xl leading-tight sm:text-6xl">
           {hero.title}
-        </h1>
+        </h2>
         <p className="mt-4 font-serif text-2xl">{hero.subtitle}</p>
         <p className="mt-6 max-w-md text-sm leading-relaxed">{hero.body}</p>
         <ButtonLink href="#csomagok" variant="light" className="mt-8 text-xs uppercase tracking-widest">

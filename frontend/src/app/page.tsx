@@ -7,6 +7,9 @@ import { HomeHero } from "@/features/home/home-hero";
 import { ServicesSection } from "@/features/home/services-section";
 import { Footer } from "@/features/layout/footer";
 import { Header } from "@/features/layout/header";
+import { CtaBand } from "@/features/pricing/components/cta-band";
+import { PricingHero } from "@/features/pricing/components/pricing-hero";
+import { PricingSection } from "@/features/pricing/components/pricing-section";
 
 export default function Home() {
   return (
@@ -19,6 +22,12 @@ export default function Home() {
           <AboutSection />
         </div>
         <ServicesSection />
+        {/* Moved here from the former /arak page; it gets merged with the services section later. */}
+        <div id="arak">
+          <PricingHero />
+          <PricingSection />
+          <CtaBand />
+        </div>
         {/* GalleryBand and ReviewsSection stay hidden until real client photos and reviews exist. */}
         <div className="border-t border-line py-6">
           <FaqSection />

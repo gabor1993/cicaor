@@ -15,7 +15,7 @@ export function CtaBand() {
           </h2>
           <p className="mt-1 text-sm text-muted">{ctaBand.body}</p>
         </div>
-        <ButtonLink href="/#kapcsolat">{ctaBand.cta}</ButtonLink>
+        <ButtonLink href="#kapcsolat">{ctaBand.cta}</ButtonLink>
       </div>
     </section>
   );

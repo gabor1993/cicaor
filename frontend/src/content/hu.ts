@@ -10,9 +10,6 @@ export const hu = {
   brand: { name: "CicaŐr", tagline: "Biztonságban a cicád" },
   siteDescription:
     "CicaŐr – megbízható, szeretetteljes cicaszitter szolgáltatás. A cicád a saját otthonában maradhat, amíg te távol vagy.",
-  pricingPageTitle: "Árak",
-  pricingPageDescription:
-    "CicaŐr árak: átlátható csomagok 30, 60 és 90 perces látogatásokhoz, többnapos csomagok és kiegészítő szolgáltatások.",
   skipToContent: "Ugrás a tartalomra",
   nav: {
     label: "Főmenü",
@@ -23,7 +20,7 @@ export const hu = {
       { href: "/", label: "Kezdőlap" },
       { href: "/#rolam", label: "Rólam" },
       { href: "/#szolgaltatasok", label: "Szolgáltatások" },
-      { href: "/arak/", label: "Árak" },
+      { href: "/#arak", label: "Árak" },
       { href: "/#gyik", label: "Gyakori kérdések" },
       { href: "/#kapcsolat", label: "Kapcsolat" },
     ],
