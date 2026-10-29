@@ -45,17 +45,8 @@ export const hu = {
     { icon: "paw", title: "Tapasztalat", body: "Évek óta macskák között, valódi szeretettel." },
     { icon: "house", title: "Otthonos környezet", body: "A cicád a saját otthonában maradhat." },
   ],
-  hero: {
-    eyebrow: "Árak",
-    title: "Törődés, ami megér.",
-    subtitle: "Átlátható csomagok, rugalmas megoldások.",
-    body: "A CicaŐrnél minden cicának egyedi figyelmet biztosítunk. Válaszd ki neked és cicádnak legmegfelelőbb csomagot, vagy kérj egyedi ajánlatot!",
-    cta: "Fedezd fel az árakat",
-    script: "Mert minden cica különleges",
-    imageAlt: "Kényelmesen pihenő cirmos cica egy kötött takarón",
-  },
   packages: {
-    eyebrow: "Csomagok",
+    eyebrow: "Árak és csomagok",
     title: "Válaszd ki a számodra ideális gondoskodást!",
     subtitle:
       "Minden csomagunk tartalmazza az alapvető gondoskodást, a szeretetteljes törődést és a rendszeres beszámolót a gazdi számára.",

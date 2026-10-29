@@ -8,7 +8,7 @@ export function PricingSection() {
   const { packages } = hu;
 
   return (
-    <section id="csomagok" aria-labelledby="packages-title" className="px-4 py-16 sm:px-6 sm:py-20">
+    <section id="arak" aria-labelledby="packages-title" className="border-t border-line px-4 py-16 sm:px-6 sm:py-20">
       <div className="mx-auto flex max-w-6xl flex-col gap-16">
         <div>
           <SectionHeading
