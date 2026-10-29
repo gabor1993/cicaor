@@ -7,15 +7,23 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { ButtonLink } from "@/components/ui/button-link";
 import { hu } from "@/content/hu";
+import { useActiveSection } from "./use-active-section";
 
-function isActive(href: string, pathname: string): boolean {
-  if (href === "/") return pathname === "/";
-  return !href.includes("#") && pathname.startsWith(href.replace(/\/$/, ""));
+const sectionIds = hu.nav.items.flatMap((item) => (item.href.includes("#") ? [item.href.split("#")[1]] : []));
+
+// Every menu item points into the home page: section links are current while their section is
+// on screen, and "Kezdőlap" while the reader is still above the first section.
+function currentFor(href: string, pathname: string, activeSection: string): "page" | "location" | undefined {
+  if (pathname !== "/") return undefined;
+  const hash = href.split("#")[1];
+  if (hash) return hash === activeSection ? "location" : undefined;
+  return activeSection === "" ? "page" : undefined;
 }
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const activeSection = useActiveSection(sectionIds);
   const { nav } = hu;
 
   return (
@@ -26,14 +34,14 @@ export function Header() {
         <nav aria-label={nav.label} className="hidden lg:block">
           <ul className="flex items-center gap-4 xl:gap-7">
             {nav.items.map((item) => {
-              const active = isActive(item.href, pathname);
+              const current = currentFor(item.href, pathname, activeSection);
               return (
                 <li key={item.href}>
                   <AnchorLink
                     href={item.href}
-                    aria-current={active ? "page" : undefined}
+                    aria-current={current}
                     className={`whitespace-nowrap border-b py-1 text-[0.72rem] transition hover:text-accent xl:text-[0.8rem] ${
-                      active ? "border-foreground" : "border-transparent"
+                      current ? "border-foreground" : "border-transparent"
                     }`}
                   >
                     {item.label}
@@ -71,8 +79,8 @@ export function Header() {
                 <AnchorLink
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  aria-current={isActive(item.href, pathname) ? "page" : undefined}
-                  className="block rounded-lg px-3 py-3 text-base aria-[current=page]:font-bold"
+                  aria-current={currentFor(item.href, pathname, activeSection)}
+                  className="block rounded-lg px-3 py-3 text-base aria-[current]:font-bold"
                 >
                   {item.label}
                 </AnchorLink>
