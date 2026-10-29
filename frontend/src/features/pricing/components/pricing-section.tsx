@@ -1,7 +1,6 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 import { AddOnsGrid } from "./add-ons-grid";
-import { MultiDayStrip } from "./multi-day-strip";
 import { PricingCard } from "./pricing-card";
 
 export function PricingSection() {
@@ -24,7 +23,6 @@ export function PricingSection() {
             ))}
           </div>
         </div>
-        <MultiDayStrip />
         <AddOnsGrid />
       </div>
     </section>

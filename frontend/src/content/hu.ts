@@ -49,7 +49,7 @@ export const hu = {
     eyebrow: "Árak és csomagok",
     title: "Válaszd ki a számodra ideális gondoskodást!",
     subtitle:
-      "Minden csomagunk tartalmazza az alapvető gondoskodást, a szeretetteljes törődést és a rendszeres beszámolót a gazdi számára.",
+      "Minden csomagunk tartalmazza az alapvető gondoskodást, a szeretetteljes törődést és a rendszeres beszámolót a gazdi számára. Hosszabb távollét esetén kedvezőbb napi áron gondoskodunk cicádról.",
     durationLabel: "Látogatás hossza",
     minutes: "perc",
     perVisit: "/ látogatás",
@@ -109,13 +109,10 @@ export const hu = {
     ],
   },
   multiDay: {
-    title: "Többnapos csomagok",
-    body: "Hosszabb távollét esetén a többnapos csomagokkal még kedvezőbb áron gondoskodunk cicádról.",
-    script: "Kedvezőbb áron hosszabb távolléthez",
-    tag: "(többnapos)",
+    label: "Többnapos távollétre:",
     perNight: "/ nap",
+    // TODO: state the visit length; at 60 minutes some daily rates exceed the single-visit price.
     visitsPerDay: "(1 látogatás/nap)",
-    cta: "Részletek a többnapos csomagokról",
   },
   addOns: {
     eyebrow: "Felárak",

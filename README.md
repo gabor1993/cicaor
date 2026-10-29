@@ -2,7 +2,7 @@
 
 Website for a cat sitting service.
 
-- `/` – single page: hero, highlights, about, services, detailed pricing (`#arak`: packages with 30/60/90 minute visits, multi-day offers and add-ons), FAQ and the contact form. "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the contact form. The gallery and reviews sections are hidden until real content exists.
+- `/` – single page: hero, highlights, about, services, detailed pricing (`#arak`: packages with 30/60/90 minute visits and daily multi-day rates, collapsible add-ons), FAQ and the contact form. "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the contact form. The gallery and reviews sections are hidden until real content exists.
 - `/adatkezelesi-tajekoztato/` and `/aszf/` – privacy policy and terms, rendered from `frontend/src/content/legal-hu.ts`. Every `[TODO: …]` must be filled in and both texts reviewed by a lawyer before going live.
 
 - `frontend/` – Next.js (App Router, TypeScript strict, Tailwind CSS v4), static export (`output: "export"`).

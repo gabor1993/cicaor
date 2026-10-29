@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown, PawPrint } from "lucide-react";
+import { CalendarDays, Check, ChevronDown, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { hu, type Duration } from "@/content/hu";
@@ -13,6 +13,7 @@ type PricingPackage = (typeof hu.packages.items)[number];
 export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 2 }) {
   const [duration, setDuration] = useState<Duration>(60);
   const copy = hu.packages;
+  const { multiDay } = hu;
   const headingId = `package-${pkg.id}`;
 
   return (
@@ -42,10 +43,19 @@ export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 
 
         <DurationSelector name={`duration-${pkg.id}`} value={duration} onChange={setDuration} />
 
-        <p className="font-display text-3xl">
-          {formatPrice(getVisitPrice(pkg.prices, duration))}{" "}
-          <span className="font-sans text-sm text-muted">{copy.perVisit}</span>
-        </p>
+        <div>
+          <p className="font-display text-3xl">
+            {formatPrice(getVisitPrice(pkg.prices, duration))}{" "}
+            <span className="font-sans text-sm text-muted">{copy.perVisit}</span>
+          </p>
+          <p className="mt-2 flex gap-2 text-sm">
+            <CalendarDays aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
+            <span>
+              {multiDay.label} <strong>{formatPrice(pkg.perNight)}</strong> {multiDay.perNight}{" "}
+              <span className="whitespace-nowrap text-muted">{multiDay.visitsPerDay}</span>
+            </span>
+          </p>
+        </div>
 
         <details className="group">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm font-bold [&::-webkit-details-marker]:hidden">
