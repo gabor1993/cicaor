@@ -23,6 +23,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="hu"
+      // Lets Next.js switch off the smooth scrolling from globals.css while it resets the scroll
+      // position on page changes; without it the reset is animated and can land mid-page.
+      data-scroll-behavior="smooth"
       className={`${playfair.variable} ${cormorant.variable} ${lato.variable} ${caveat.variable} antialiased`}
     >
       <body>
