@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, PawPrint } from "lucide-react";
+import { Check, ChevronDown, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { hu, type Duration } from "@/content/hu";
@@ -47,14 +47,20 @@ export function PricingCard({ pkg, tone }: { pkg: PricingPackage; tone: 0 | 1 | 
           <span className="font-sans text-sm text-muted">{copy.perVisit}</span>
         </p>
 
-        <ul className="flex flex-1 flex-col gap-2 text-sm">
-          {pkg.features.map((feature) => (
-            <li key={feature} className="flex gap-2">
-              <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
-              {feature}
-            </li>
-          ))}
-        </ul>
+        <details className="group">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm font-bold [&::-webkit-details-marker]:hidden">
+            {copy.features}
+            <ChevronDown aria-hidden className="size-4 shrink-0 transition group-open:rotate-180" />
+          </summary>
+          <ul className="mt-3 flex flex-col gap-2 text-sm">
+            {pkg.features.map((feature) => (
+              <li key={feature} className="flex gap-2">
+                <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </details>
 
         <p className="flex items-center gap-2 border-t border-line pt-4 text-xs text-muted">
           <PawPrint aria-hidden className="size-4 shrink-0" />

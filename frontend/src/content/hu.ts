@@ -56,6 +56,7 @@ export const hu = {
     popular: "Népszerű",
     select: "Kiválasztom",
     recommended: "Javasolt időtartam: 30 / 60 / 90 perc",
+    features: "Mit tartalmaz?",
     items: [
       {
         id: "komfort",
