@@ -7,7 +7,7 @@ export function HomeHero() {
   const { homeHero } = hu;
 
   return (
-    <section aria-labelledby="home-hero-title" className="relative isolate overflow-hidden">
+    <section aria-labelledby="home-hero-title" className="relative isolate overflow-hidden lg:flex lg:min-h-[min(42vw,720px)] lg:items-center">
       {/* The hero photo is the LCP element, so it loads eagerly with high priority. */}
       <Image
         src="/images/hero.webp"
@@ -21,7 +21,7 @@ export function HomeHero() {
       {/* Darkens the left side so the white text meets WCAG AA contrast on any photo. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-14 text-[#f6f3ec] sm:px-6 lg:py-16">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-14 text-[#f6f3ec] sm:px-6 lg:py-16">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.35em]">{homeHero.eyebrow}</p>
         <h1 id="home-hero-title" className="mt-2 flex items-start gap-3 font-display text-6xl leading-none sm:text-7xl">
           {homeHero.title}
