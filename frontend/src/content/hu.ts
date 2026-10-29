@@ -195,7 +195,7 @@ export const hu = {
     script: "A cicák mosolyt csalnak az életbe.",
     quote: "„Nem csak egy állat, hanem egy családtag.”",
     imageAlt: "Mosolygó cicaszitter átöleli a cirmos cicát",
-    quoteImageAlt: "Kíváncsi cirmos cica néz a kamerába",
+    quoteImageAlt: "Kék szemű, világos cirmos cica kíváncsian néz felfelé",
   },
   services: {
     eyebrow: "Szolgáltatások",

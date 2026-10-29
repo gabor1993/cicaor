@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Check, Heart, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
@@ -39,7 +40,14 @@ export function AboutSection() {
         </p>
 
         <figure className="overflow-hidden bg-band">
-          <PhotoPlaceholder alt={about.quoteImageAlt} tone={2} className="aspect-[4/3]" />
+          <Image
+            src="/images/about-quote.webp"
+            alt={about.quoteImageAlt}
+            width={547}
+            height={365}
+            sizes="(min-width: 1024px) 25vw, 100vw"
+            className="aspect-[4/3] w-full object-cover"
+          />
           <blockquote className="px-5 py-5 text-center font-serif text-lg italic leading-snug">
             {about.quote}
             <PawPrint aria-hidden className="mx-auto mt-3 size-4 not-italic" />
