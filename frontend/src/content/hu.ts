@@ -196,24 +196,24 @@ export const hu = {
   services: {
     eyebrow: "Szolgáltatások",
     title: "Miben tudok segíteni?",
-    subtitle: "Rövid vagy hosszabb távollét esetén is számíthatsz rám.",
+    subtitle: "Amíg távol vagy, a cicád a saját otthonában marad – én megyek hozzá.",
     items: [
       {
         icon: "house",
         title: "Napi látogatás",
-        body: "Etetés, friss víz, alom takarítás, játék, simogatás, fotók.",
+        body: "Megetetem a cicádat, friss vizet adok, kitakarítom az almot, és jut idő játékra, simogatásra is. Minden látogatás után fotót és rövid üzenetet küldök.",
         imageAlt: "Fekete-fehér cica sétál a nyitott ajtó mellett",
       },
       {
         icon: "cats",
-        title: "Több cica esetén",
-        body: "Több cica, több törődés. Egyedi igények szerint.",
+        title: "Több cica egy otthonban",
+        body: "Ha több cicád van, mindegyikre külön figyelek: a saját tálja, a saját tempója, a saját kedvenc játéka. Az etetést és az esetleges gyógyszerezést előre egyeztetjük.",
         imageAlt: "Két fekete-fehér cica orrot érint az ablak előtt",
       },
       {
         icon: "calendar",
         title: "Hosszabb távollét",
-        body: "Egyéni egyeztetés alapján, rugalmas csomagokkal.",
+        body: "Egy hosszabb utazás alatt is minden nap ott vagyok, így a cicád megszokott környezetben, nyugodtan vár haza. Többnapos távollétre kedvezőbb csomagokat kínálok.",
         imageAlt: "Fekete-fehér cica pihen egy kötött takarón",
       },
     ],
