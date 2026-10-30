@@ -69,6 +69,7 @@ export const privacyPolicy: LegalDocument = {
             "Időtartam: ha nem jön létre megrendelés, a megkeresés lezárásától számított [TODO: pl. 1 év] elteltével törlöm az adatokat. Megrendelés esetén a szerződés megszűnésétől számított 5 évig (a polgári jogi elévülési idő) őrzöm meg őket.",
           ],
         },
+        "Az űrlap elküldése után automatikus visszaigazoló e-mailt küldök a megadott címre. Ez csak a nevedet, a választott csomagot és időtartamot tartalmazza, az üzenetedet nem.",
         "A hozzájárulásodat bármikor visszavonhatod egy e-mailben, ez nem érinti a visszavonás előtti adatkezelés jogszerűségét.",
       ],
     },
@@ -116,8 +117,9 @@ export const privacyPolicy: LegalDocument = {
         "Személyes adataidat nem adom el és nem adom át harmadik félnek marketing célra. Az alábbi szolgáltatók a működéshez szükséges mértékben, a megbízásom alapján férhetnek hozzá:",
         {
           list: [
-            "Tárhelyszolgáltató: [TODO: név, cím, weboldal]",
-            "E-mail szolgáltató: [TODO: név, cím, weboldal]",
+            "A weboldal tárhelye: Netlify, Inc. (netlify.com), [TODO: székhely]. A Netlify az Egyesült Államokban is tárolhat technikai naplóadatokat (például IP-címet); az adattovábbítás alapja [TODO: az EU–USA adatvédelmi keretrendszer vagy általános szerződési feltételek, a Netlify adatfeldolgozási szerződése alapján ellenőrizendő].",
+            "A kapcsolati űrlap és a tartalomkezelő tárhelye: [TODO: Nethely Kft. pontos cégneve, székhelye], nethely.hu.",
+            "E-mail szolgáltató (a kapcsolati űrlap leveleinek kézbesítése): [TODO: név, cím, weboldal]",
             "Könyvelő / számlázó program: [TODO: ha van]",
           ],
         },
@@ -210,6 +212,9 @@ export const terms: LegalDocument = {
         {
           list: [
             "A szolgáltatás díja a weboldalon közzétett, illetve az egyedi ajánlatban szereplő ár. A weboldalon feltüntetett árak tájékoztató jellegűek, a végleges díjat a foglaláskor rögzítjük.",
+            "A látogatás díja a választott csomagtól és a látogatás időtartamától függ. 3 napnál hosszabb távollét esetén kedvezményes napi díj érvényes, napi egy látogatással.",
+            "A csomagárakon felül a weboldal „Kiegészítő szolgáltatások” részében felsorolt felárak fizetendők (például további cica, hétvége és ünnepnap, sürgős foglalás, napi két látogatás, külön kulcsátadás), a foglaláskor közölt mértékben.",
+            "Kiszállási díj: Budapest belső kerületeiben nincs, a külső kerületekben a weboldalon feltüntetett egységes díj fizetendő látogatásonként. Budapesten kívüli címre egyedi ajánlatot adok. [TODO: a belső kerületek pontos felsorolása, jogásszal egyeztetendő]",
             "Az árak [TODO: alanyi adómentesség esetén: \"az ÁFA-t nem tartalmazzák, alanyi adómentesség miatt\" / egyébként: \"bruttó árak\"].",
             "Fizetési mód: [TODO: készpénz, banki átutalás].",
             "Fizetési határidő: [TODO: pl. az első látogatáskor / előre / a szolgáltatás végén].",
