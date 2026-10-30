@@ -1,0 +1,16 @@
+.cicaor-media img {
+  display: block;
+  max-width: 240px;
+  max-height: 160px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.cicaor-media img[hidden] {
+  display: none;
+}
+
+.cicaor-number {
+  width: 8em;
+}
