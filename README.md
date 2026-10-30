@@ -10,7 +10,7 @@ Website for a cat sitting service.
 
 ## Requirements
 - Node.js LTS and npm
-- PHP 8.1+ (the project was tested with 8.3)
+- PHP 8.1+ (the project was tested with 8.3) and Composer
 
 ## Frontend
 
@@ -35,14 +35,20 @@ All Hungarian copy lives in `frontend/src/content/hu.ts`. Prices marked `TODO` t
 
 ```bash
 cd backend
+composer install
 cp .env.example .env     # then edit the values
 php tests/validation-test.php
+php tests/mail-template-test.php
 ```
+
+Every enquiry sends two HTML mails (with a plain-text alternative) through SMTP with PHPMailer: a notification to `MAIL_TO` and a confirmation to the visitor. The templates are in `backend/templates/`. The confirmation never repeats the visitor's message, because anyone can type someone else's address into the form.
 
 | Variable | Purpose |
 | --- | --- |
-| `MAIL_DRIVER` | `log` writes mails to `storage/mail.log` (development), `mail` uses PHP `mail()` |
-| `MAIL_TO` / `MAIL_FROM` | Recipient and sender address |
+| `MAIL_DRIVER` | `smtp` sends real mail, `log` writes it to `storage/mail.log` plus an `.html` preview per mail type (development) |
+| `MAIL_TO` / `MAIL_FROM` / `MAIL_FROM_NAME` | Recipient, sender address and sender name |
+| `SMTP_HOST` / `SMTP_PORT` / `SMTP_ENCRYPTION` | SMTP server; `587` with `tls` (STARTTLS) or `465` with `ssl` |
+| `SMTP_USERNAME` / `SMTP_PASSWORD` | SMTP login of the sending mailbox |
 | `ALLOWED_ORIGINS` | Comma separated origins allowed by CORS, e.g. `https://your-site.example` |
 | `RATE_LIMIT_MAX` / `RATE_LIMIT_WINDOW_SECONDS` | Requests allowed per IP per window |
 
@@ -50,10 +56,10 @@ Never commit `.env`.
 
 ## Deploy checklist
 1. Build the frontend with the production `NEXT_PUBLIC_CONTACT_API_URL`, upload `frontend/out` to Netlify (or any static host).
-2. Netlify cannot run PHP: host `backend/` on a PHP-capable server and make sure `.env`, `src/` and `storage/` are not publicly readable (the `.htaccess` files cover Apache).
-3. Set `ALLOWED_ORIGINS` to the exact production origin, `MAIL_DRIVER=mail`, and configure SPF/DKIM/DMARC for the sending domain.
+2. Netlify cannot run PHP: host `backend/` on a PHP-capable server, run `composer install --no-dev` there, and make sure `.env`, `composer.*`, `src/`, `templates/`, `tests/`, `vendor/` and `storage/` are not publicly readable (the `.htaccess` files cover Apache).
+3. Set `ALLOWED_ORIGINS` to the exact production origin, `MAIL_DRIVER=smtp` with the SMTP values, and configure SPF/DKIM/DMARC for the sending domain. `MAIL_FROM` must be the mailbox the SMTP login belongs to.
 4. Replace placeholder photos (`PhotoPlaceholder`), `TODO` texts and social links.
-5. Run `npm test`, `npm run lint`, `npm run build`, `npm audit` and `composer audit` (if Composer is introduced).
+5. Run `npm test`, `npm run lint`, `npm run build`, `npm audit` and `composer audit`.
 
 ## Decisions
 - **Typed content file instead of `next-intl`:** the site is Hungarian only, so a typed dictionary avoids an extra dependency. It can be migrated to `next-intl` if more languages are needed.

@@ -1,0 +1,10 @@
+{
+    "name": "cicaor/backend",
+    "description": "Contact form endpoint for the CicaŐr website.",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1",
+        "phpmailer/phpmailer": "^7.1"
+    }
+}

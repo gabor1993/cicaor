@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/src/env.php';
 require __DIR__ . '/src/validation.php';
 require __DIR__ . '/src/rate-limit.php';
@@ -73,6 +74,13 @@ try {
     // Technical details go to the server log only, never to the visitor.
     error_log('Contact mail failed: ' . $exception->getMessage());
     respond(500, ['error' => 'send_failed']);
+}
+
+// The enquiry has already arrived, so a failed confirmation must not turn into an error for the visitor.
+try {
+    sendVisitorConfirmation($data);
+} catch (Throwable $exception) {
+    error_log('Visitor confirmation failed: ' . $exception->getMessage());
 }
 
 respond(200, ['ok' => true]);

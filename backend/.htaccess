@@ -1,4 +1,7 @@
-# Never serve the secrets file
-<Files ".env">
+# Never serve the secrets file or the dependency manifests
+<FilesMatch "^(\.env|composer\.(json|lock))$">
     Require all denied
-</Files>
+</FilesMatch>
+
+# vendor/ is not in git, so it cannot carry its own .htaccess like src/ and storage/ do
+RedirectMatch 404 /(vendor|tests)(/|$)
