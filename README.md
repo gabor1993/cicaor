@@ -64,7 +64,7 @@ npm run typecheck
 | `NEXT_PUBLIC_CONTACT_API_URL` | Full URL of `backend/contact.php` (live mode). Falls back to `/backend/contact.php`. It is public by design (inlined at build time), so never put secrets in it. |
 | `CMS_URL` | Base URL of the WordPress CMS, e.g. `https://cms.example.hu`. Build-time only. Without it the build uses the committed content snapshot. |
 
-On Netlify's production build (`CONTEXT=production`) the build stops when a required value is missing or not `https` (`src/lib/build-env.ts`): the demo needs `SITE_URL`, the live site also `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL`. After the build, `scripts/write-headers.mts` writes `out/_headers` with the security headers; the CSP allows fetches only to the contact backend's origin (none in the demo).
+On Netlify's production build (`CONTEXT=production`) the build stops when a required value is missing or not `https` (`src/lib/build-env.ts`): the demo needs `SITE_URL`, the live site also `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL`. After the build, `scripts/postbuild.mts` writes `out/_headers` with the security headers; the CSP allows fetches only to the contact backend's origin (none in the demo).
 
 ### Content (WordPress CMS)
 
@@ -125,6 +125,7 @@ Never commit `.env`.
 - **Plain PHP endpoint instead of Laravel:** one form does not justify a framework.
 - **URL parameters for the chosen package:** "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the form, survives a reload and needs no shared client state. The values are validated against the known packages before use.
 - **CSP with `'unsafe-inline'` scripts:** a static export inlines its boot scripts and cannot use per-request nonces. The policy still blocks foreign scripts, framing, plugins and requests to any other host.
+- **Prefetch file repair after Windows builds:** Next.js 16 names segment prefetch files with `path.relative()`, so a Windows export nests them in folders the browser never asks for. `scripts/segment-files.ts` adds the expected flat copies; on Linux it finds nothing to do.
 - **Demo mode by default:** the site cannot accidentally go live as a bookable service before the business and its legal texts are ready.
 - **Light theme only:** the design is light. Dark tokens exist behind `data-theme="dark"` but nothing toggles them yet.
 - **Zod on the frontend and manual checks in PHP:** rules are mirrored by hand in `schema.ts` and `validation.php`; keep them in sync.

@@ -2,3 +2,7 @@
 [build]
   command = "npm run build"
   publish = "out"
+
+# The build scripts in scripts/*.mts rely on Node's built-in TypeScript type stripping (Node 22.18+).
+[build.environment]
+  NODE_VERSION = "24"

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "prebuild": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/pull-cms-content.mts",
     "build": "next build",
-    "postbuild": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/write-headers.mts",
+    "postbuild": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/postbuild.mts",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
