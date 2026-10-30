@@ -45,7 +45,7 @@
   --color-band: var(--band);
   --color-footer: var(--footer);
   --color-on-footer: var(--on-footer);
-  --font-sans: var(--font-lato), system-ui, sans-serif;
+  --font-sans: var(--font-carlito), system-ui, sans-serif;
   --font-display: var(--font-playfair), Georgia, serif;
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-script: var(--font-caveat), cursive;

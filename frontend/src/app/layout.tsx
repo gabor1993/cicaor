@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Cormorant_Garamond, Lato, Playfair_Display } from "next/font/google";
+import { Carlito, Caveat, Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import { hu } from "@/content/hu";
 import "./globals.css";
 
@@ -11,7 +11,8 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
 });
-const lato = Lato({ variable: "--font-lato", subsets: ["latin", "latin-ext"], weight: ["400", "700"] });
+// Carlito is built on Lato 2; the Lato served by Google Fonts lacks ő and ű despite "latin-ext".
+const carlito = Carlito({ variable: "--font-carlito", subsets: ["latin", "latin-ext"], weight: ["400", "700"] });
 const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       // Lets Next.js switch off the smooth scrolling from globals.css while it resets the scroll
       // position on page changes; without it the reset is animated and can land mid-page.
       data-scroll-behavior="smooth"
-      className={`${playfair.variable} ${cormorant.variable} ${lato.variable} ${caveat.variable} antialiased`}
+      className={`${playfair.variable} ${cormorant.variable} ${carlito.variable} ${caveat.variable} antialiased`}
     >
       <body>
         <a
