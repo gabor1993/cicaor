@@ -44,6 +44,12 @@ check('unknown package is rejected', isset($errors['packageId']));
 [, $errors] = validateContact([...$valid, 'duration' => '45']);
 check('unknown duration is rejected', isset($errors['duration']));
 
+[, $errors] = validateContact([...$valid, 'packageId' => 'lux', 'duration' => '30']);
+check('duration the package does not offer is rejected', isset($errors['duration']));
+
+[, $errors] = validateContact([...$valid, 'packageId' => '', 'duration' => '30']);
+check('any duration is allowed without a package', $errors === []);
+
 [, $errors] = validateContact([...$valid, 'consent' => 'true']);
 check('consent must be a real boolean true', isset($errors['consent']));
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 const PACKAGE_IDS = ['', 'komfort', 'moka', 'lux'];
 const DURATIONS = ['30', '60', '90'];
+// Packages that cannot be booked for every duration.
+const PACKAGE_DURATIONS = ['lux' => ['60', '90']];
 
 /**
  * Mirrors the Zod schema in frontend/src/features/contact/schema.ts. The browser check is only for UX,
@@ -38,6 +40,8 @@ function validateContact(array $input): array
     $duration = (string) ($input['duration'] ?? '');
     if (!in_array($duration, DURATIONS, true)) {
         $errors['duration'] = 'invalid';
+    } elseif (!in_array($duration, PACKAGE_DURATIONS[$packageId] ?? DURATIONS, true)) {
+        $errors['duration'] = 'unavailable';
     }
 
     $message = trim((string) ($input['message'] ?? ''));

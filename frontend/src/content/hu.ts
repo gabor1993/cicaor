@@ -1,5 +1,6 @@
 // All user-facing copy lives here so components stay free of hardcoded text.
 // Package rates: "base" is the 30-minute price and "step" is added for every further 30 minutes.
+// A package without the 30-minute option keeps its 30-minute base as the starting point of the calculation.
 
 export const durations = [30, 60, 90] as const;
 export type Duration = (typeof durations)[number];
@@ -55,7 +56,7 @@ export const hu = {
     perVisit: "/ látogatás",
     popular: "Népszerű",
     select: "Kiválasztom",
-    bookable: "Foglalható időtartam: 30 / 60 / 90 perc",
+    bookable: "Foglalható időtartam:",
     features: "Mit tartalmaz?",
     items: [
       {
@@ -63,8 +64,9 @@ export const hu = {
         label: "Alapcsomag",
         name: "CicaKomfort",
         tagline: "Az alapvető szükségletek biztonságban.",
-        visitRate: { base: 3000, step: 3000 },
-        multiDayRate: { base: 2500, step: 1500 },
+        durations: [30, 60, 90],
+        visitRate: { base: 4000, step: 3000 },
+        multiDayRate: { base: 3500, step: 1500 },
         features: [
           "Etetés, friss víz",
           "Alomtisztítás",
@@ -79,8 +81,9 @@ export const hu = {
         label: "Komplett csomag",
         name: "CicaMóka",
         tagline: "Több idő, több figyelem, több közös játék.",
-        visitRate: { base: 4000, step: 3000 },
-        multiDayRate: { base: 3500, step: 1500 },
+        durations: [30, 60, 90],
+        visitRate: { base: 5000, step: 3000 },
+        multiDayRate: { base: 4500, step: 1500 },
         features: [
           "Minden, ami a CicaKomfort csomagban van",
           "Játék és foglalkozás",
@@ -95,8 +98,9 @@ export const hu = {
         label: "Prémium csomag",
         name: "CicaLux",
         tagline: "Több társaság, több nyugalom.",
-        visitRate: { base: 5000, step: 3000 },
-        multiDayRate: { base: 4000, step: 1500 },
+        durations: [60, 90],
+        visitRate: { base: 6000, step: 3000 },
+        multiDayRate: { base: 5000, step: 1500 },
         features: [
           "Minden, ami a CicaMóka csomagban van",
           "Több játék és foglalkozás",
@@ -300,6 +304,7 @@ export const hu = {
       messageRequired: "Kérjük, írj üzenetet.",
       messageTooLong: "Az üzenet legfeljebb 2000 karakter lehet.",
       consentRequired: "Az adatkezelés elfogadása szükséges.",
+      durationUnavailable: "Ehhez a csomaghoz ez az időtartam nem foglalható.",
     },
   },
   footer: {

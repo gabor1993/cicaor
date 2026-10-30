@@ -3,8 +3,8 @@
 import { Suspense, useEffect, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { durations, hu } from "@/content/hu";
-import { parseSelection, type PackageSelection } from "@/features/pricing/lib/pricing";
+import { hu } from "@/content/hu";
+import { durationsFor, fitDuration, parseSelection, type PackageSelection } from "@/features/pricing/lib/pricing";
 import { contactSchema } from "./schema";
 
 // A package chosen in the pricing section arrives in the URL. useSearchParams needs a Suspense
@@ -117,9 +117,10 @@ export function ContactSection() {
           {contact.fields.package}
           <select
             value={selection.packageId}
-            onChange={(event) =>
-              select({ ...selection, packageId: event.target.value as typeof selection.packageId })
-            }
+            onChange={(event) => {
+              const packageId = event.target.value as typeof selection.packageId;
+              select({ packageId, duration: fitDuration(packageId, selection.duration) });
+            }}
             className={inputClass}
           >
             <option value="">{contact.fields.packageNone}</option>
@@ -138,13 +139,15 @@ export function ContactSection() {
               select({ ...selection, duration: Number(event.target.value) as typeof selection.duration })
             }
             className={inputClass}
+            {...fieldProps("duration")}
           >
-            {durations.map((duration) => (
+            {durationsFor(selection.packageId).map((duration) => (
               <option key={duration} value={duration}>
                 {duration} {packages.minutes}
               </option>
             ))}
           </select>
+          {fieldError("duration")}
         </label>
         <label className="text-sm sm:col-span-2">
           {contact.fields.message}
@@ -171,8 +174,7 @@ export function ContactSection() {
           <label className="flex items-start gap-2 text-sm">
             <input name="consent" type="checkbox" className="mt-1" {...fieldProps("consent")} />
             <span>
-              {contact.fields.consent.before}{" "}
-              {/* A new tab keeps what the visitor has already typed into the form. */}
+              {contact.fields.consent.before} {/* A new tab keeps what the visitor has already typed into the form. */}
               <a
                 href="/adatkezelesi-tajekoztato/"
                 target="_blank"

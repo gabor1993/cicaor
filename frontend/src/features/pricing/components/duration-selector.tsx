@@ -1,17 +1,18 @@
-import { durations, hu, type Duration } from "@/content/hu";
+import { hu, type Duration } from "@/content/hu";
 
 type DurationSelectorProps = {
   name: string;
+  options: readonly Duration[];
   value: Duration;
   onChange: (duration: Duration) => void;
 };
 
-export function DurationSelector({ name, value, onChange }: DurationSelectorProps) {
+export function DurationSelector({ name, options, value, onChange }: DurationSelectorProps) {
   return (
     <fieldset>
       <legend className="sr-only">{hu.packages.durationLabel}</legend>
       <div className="flex gap-2">
-        {durations.map((duration) => (
+        {options.map((duration) => (
           <label key={duration} className="flex-1">
             <input
               type="radio"

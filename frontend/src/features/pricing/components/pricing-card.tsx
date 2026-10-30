@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CalendarDays, Check, ChevronDown, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { hu, type Duration, type PackageId } from "@/content/hu";
-import { contactLinkFor, formatPrice, priceFor } from "../lib/pricing";
+import { contactLinkFor, durationsFor, formatPrice, priceFor } from "../lib/pricing";
 import { DurationSelector } from "./duration-selector";
 
 type PricingPackage = (typeof hu.packages.items)[number];
@@ -21,6 +21,7 @@ export function PricingCard({ pkg }: { pkg: PricingPackage }) {
   const copy = hu.packages;
   const { multiDay } = hu;
   const headingId = `package-${pkg.id}`;
+  const options = durationsFor(pkg.id);
 
   return (
     <article
@@ -54,7 +55,7 @@ export function PricingCard({ pkg }: { pkg: PricingPackage }) {
           <p className="mt-1 font-serif text-lg text-muted">{pkg.tagline}</p>
         </header>
 
-        <DurationSelector name={`duration-${pkg.id}`} value={duration} onChange={setDuration} />
+        <DurationSelector name={`duration-${pkg.id}`} options={options} value={duration} onChange={setDuration} />
 
         <div>
           <p className="font-display text-3xl">
@@ -87,7 +88,7 @@ export function PricingCard({ pkg }: { pkg: PricingPackage }) {
 
         <p className="flex items-center gap-2 border-t border-line pt-4 text-xs text-muted">
           <PawPrint aria-hidden className="size-4 shrink-0" />
-          {copy.bookable}
+          {copy.bookable} {options.join(" / ")} {copy.minutes}
         </p>
 
         <ButtonLink
