@@ -142,9 +142,9 @@ export const hu = {
         id: "travel",
         icon: "map-pin",
         name: "Kiszállás / távolság",
-        price: "+500 – 1 500 Ft",
+        price: "0 – 1 500 Ft",
         unit: "/ látogatás",
-        note: "Az alap területen kívüli címek esetén.",
+        note: "Budapest belső kerületeiben díjmentes, a külső kerületekben egységesen 1 500 Ft.",
       },
       {
         id: "urgent",
