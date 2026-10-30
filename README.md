@@ -30,6 +30,9 @@ npm run typecheck
 | --- | --- |
 | `NEXT_PUBLIC_CONTACT_API_URL` | Full URL of `backend/contact.php`. Falls back to `/backend/contact.php`. It is public by design (inlined at build time), so never put secrets in it. |
 | `CMS_URL` | Base URL of the WordPress CMS, e.g. `https://cms.example.hu`. Build-time only, not exposed to the browser. Without it the build uses the committed snapshot. |
+| `SITE_URL` | Public origin, e.g. `https://cicaor.hu`. Used for canonical URLs, the sitemap, `robots.txt`, Open Graph and JSON-LD. Defaults to `http://localhost:3000`. |
+
+On Netlify's production build (`CONTEXT=production`), `SITE_URL`, `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL` are required and must be `https`; the build stops otherwise (`src/lib/build-env.ts`). After the build, `scripts/write-headers.mts` writes `out/_headers` with the security headers (CSP, framing, referrer and permissions policy); the CSP allows fetches only to the contact backend's origin.
 
 Components read all copy through `frontend/src/content/hu.ts`. It holds the fixed interface text and merges in the editable content from `site-content.json`, which the CMS owns.
 
@@ -59,6 +62,7 @@ composer install
 cp .env.example .env     # then edit the values
 php tests/validation-test.php
 php tests/mail-template-test.php
+php tests/rate-limit-test.php
 ```
 
 Every enquiry sends two HTML mails (with a plain-text alternative) through SMTP with PHPMailer: a notification to `MAIL_TO` and a confirmation to the visitor. The templates are in `backend/templates/`. The confirmation never repeats the visitor's message, because anyone can type someone else's address into the form.
@@ -75,7 +79,7 @@ Every enquiry sends two HTML mails (with a plain-text alternative) through SMTP 
 Never commit `.env`.
 
 ## Deploy checklist
-1. Build the frontend with the production `NEXT_PUBLIC_CONTACT_API_URL`, upload `frontend/out` to Netlify (or any static host).
+1. Set `SITE_URL`, `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL` in Netlify's environment variables and let Netlify build from git (the production build refuses to run without them).
 2. Netlify cannot run PHP: host `backend/` on a PHP-capable server, run `composer install --no-dev` there, and make sure `.env`, `composer.*`, `src/`, `templates/`, `tests/`, `vendor/` and `storage/` are not publicly readable (the `.htaccess` files cover Apache).
 3. Set `ALLOWED_ORIGINS` to the exact production origin, `MAIL_DRIVER=smtp` with the SMTP values, and configure SPF/DKIM/DMARC for the sending domain. `MAIL_FROM` must be the mailbox the SMTP login belongs to.
 4. Upload the missing photos in the CMS (about, gallery), fill in the `TODO` texts and social links.
