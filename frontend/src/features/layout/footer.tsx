@@ -26,7 +26,7 @@ export function Footer() {
               <li key={item.href}>
                 <AnchorLink
                   href={item.href}
-                  className="whitespace-nowrap text-[0.6rem] uppercase tracking-[0.12em] text-muted hover:text-foreground xl:text-[0.65rem]"
+                  className="whitespace-nowrap text-xs uppercase tracking-[0.12em] text-muted hover:text-foreground"
                 >
                   {item.label}
                 </AnchorLink>
@@ -43,13 +43,13 @@ export function Footer() {
             </li>
           ))}
         </ul>
-        <p className="flex items-center gap-3 whitespace-nowrap text-[0.7rem] text-muted">
+        <p className="flex items-center gap-3 whitespace-nowrap text-xs text-muted">
           © {new Date().getFullYear()} {hu.brand.name}. {hu.footer.rights}
           <PawPrint aria-hidden className="size-3.5 text-foreground" />
         </p>
       </div>
       <div className="border-t border-line">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-3 text-[0.65rem] text-muted sm:flex-row sm:justify-between sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-3 text-xs text-muted sm:flex-row sm:justify-between sm:px-6">
           <nav aria-label={hu.footer.legal.label}>
             <ul className="flex gap-4">
               <li>

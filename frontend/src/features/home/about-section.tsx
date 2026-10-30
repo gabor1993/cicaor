@@ -26,7 +26,7 @@ export function AboutSection() {
             {about.titleLines[1]}
           </h2>
           <p className="mt-4 text-xs leading-relaxed text-muted">{about.body}</p>
-          <ul className="mt-4 flex flex-col gap-1.5 text-[0.7rem]">
+          <ul className="mt-4 flex flex-col gap-1.5 text-xs">
             {about.points.map((point) => (
               <li key={point} className="flex gap-2">
                 <Check aria-hidden className="size-3.5 shrink-0 text-accent" />

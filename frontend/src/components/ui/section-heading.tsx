@@ -2,7 +2,7 @@ type EyebrowProps = { children: string; lines?: boolean; className?: string };
 
 export function Eyebrow({ children, lines = false, className = "" }: EyebrowProps) {
   return (
-    <p className={`flex items-center gap-4 text-[0.65rem] font-bold uppercase tracking-[0.3em] text-muted ${className}`}>
+    <p className={`flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-muted ${className}`}>
       {lines && <span aria-hidden className="h-px w-8 bg-taupe" />}
       {children}
       {lines && <span aria-hidden className="h-px w-8 bg-taupe" />}

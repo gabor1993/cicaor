@@ -42,7 +42,7 @@ export function PricingCard({ pkg }: { pkg: PricingPackage }) {
 
       <div className="flex flex-1 flex-col gap-5 p-4">
         <header>
-          <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-muted">{pkg.label}</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-muted">{pkg.label}</p>
           <h3 id={headingId} className="mt-1 font-display text-3xl">
             {pkg.name}
           </h3>

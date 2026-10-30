@@ -37,7 +37,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
 
         <div className="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[14rem_1fr] lg:gap-14 lg:py-16">
           <nav aria-labelledby="toc-title" className="lg:sticky lg:top-24 lg:self-start print:hidden">
-            <h2 id="toc-title" className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.3em] text-muted">
+            <h2 id="toc-title" className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em] text-muted">
               <ScrollText aria-hidden className="size-4" />
               {legalUi.tocLabel}
             </h2>

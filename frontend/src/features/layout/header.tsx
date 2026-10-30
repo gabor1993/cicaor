@@ -40,7 +40,7 @@ export function Header() {
                   <AnchorLink
                     href={item.href}
                     aria-current={current}
-                    className={`whitespace-nowrap border-b py-1 text-[0.72rem] transition hover:text-accent xl:text-[0.8rem] ${
+                    className={`whitespace-nowrap border-b py-1 text-xs transition hover:text-accent xl:text-[0.8rem] ${
                       current ? "border-foreground" : "border-transparent"
                     }`}
                   >
