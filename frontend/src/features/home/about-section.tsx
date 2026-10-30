@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Check, Heart, PawPrint } from "lucide-react";
-import { ButtonLink } from "@/components/ui/button-link";
 import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
@@ -29,9 +28,6 @@ export function AboutSection() {
               </li>
             ))}
           </ul>
-          <ButtonLink href="#kapcsolat" className="mt-5 px-5 text-xs">
-            {about.cta}
-          </ButtonLink>
         </div>
 
         <p className="hidden max-w-[6.5rem] -rotate-12 flex-col items-center text-center font-script text-lg leading-tight text-taupe lg:flex">

@@ -120,7 +120,7 @@ export const hu = {
   addOns: {
     eyebrow: "Felárak",
     title: "Kiegészítő szolgáltatások",
-    subtitle: "Az alábbi felárak a csomagárakon felül, látogatásonként értendők, a látogatás időtartamától függetlenül.",
+    subtitle: "Az alábbi felárak a csomagárakon felül értendők.",
     items: [
       {
         id: "extra-cat",
@@ -154,6 +154,22 @@ export const hu = {
         unit: "/ látogatás",
         note: "24 órán belüli foglalás esetén.",
       },
+      {
+        id: "twice-daily",
+        icon: "repeat",
+        name: "Napi 2 látogatás",
+        price: "+30%",
+        unit: "/ látogatás",
+        note: "Napi két látogatásnál a választott időtartam ára 30%-kal nő.",
+      },
+      {
+        id: "key-handover",
+        icon: "key",
+        name: "Külön kulcsátadás",
+        price: "+2 000 Ft",
+        unit: "/ alkalom",
+        note: "Ha a kulcs átadása vagy visszavétele nem az ismerkedő találkozón vagy egy látogatással együtt történik.",
+      },
     ],
     show: "Felárak megjelenítése",
     hide: "Felárak elrejtése",
@@ -167,7 +183,6 @@ export const hu = {
       "Rendszeres fotókkal és üzenetekkel tartom a kapcsolatot",
       "Minden cicához egyéni figyelmet és gondoskodást biztosítok",
     ],
-    cta: "Tudj meg többet rólam",
     script: "A cicák mosolyt csalnak az életbe.",
     quote: "„Nem csak egy állat, hanem egy családtag.”",
     imageAlt: "Mosolygó cicaszitter átöleli a cirmos cicát",
@@ -236,6 +251,10 @@ export const hu = {
     showLess: "Kevesebb kérdés",
     imageAlt: "Fekete-fehér cica fekszik egy kötött takarón",
     items: [
+      {
+        q: "Melyik csomagot válasszam?",
+        a: "Ha csak az alapellátásra van szükség, a CicaKomfort elegendő. Ha a cicád szereti a játékot és a társaságot, a CicaMóka a legjobb választás. A CicaLux akkor éri meg igazán, ha a cicád mellett növényeket is kell locsolni, vagy levelet, csomagot vársz.",
+      },
       {
         q: "Meddig előre érdemes foglalni?",
         a: "Érdemes legalább 1–2 héttel előre jelezni, iskolai szünetek és ünnepek idején még korábban. Ha sürgős, írj bátran: ha van szabad időpontom, megoldjuk.",
