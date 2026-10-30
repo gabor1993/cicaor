@@ -121,8 +121,9 @@ function cicaor_text_sections(): array
     $alt = ['type' => 'text', 'label' => 'A kép rövid leírása (alt szöveg)'];
 
     return [
-        'general' => ['title' => 'Általános', 'fields' => [
-            'siteDescription' => ['type' => 'textarea', 'label' => 'Az oldal leírása a keresőknek (kb. 150 karakter)'],
+        'general' => ['title' => 'Keresők (Google)', 'fields' => [
+            'seoTitle' => ['type' => 'text', 'label' => 'Cím a találati listában (legfeljebb kb. 60 karakter, pl. Cicaszitter Budapesten – CicaŐr)'],
+            'siteDescription' => ['type' => 'textarea', 'label' => 'Leírás a találati listában (kb. 150 karakter)'],
         ]],
         'hero' => ['title' => 'Nyitókép', 'fields' => [
             'homeHero.eyebrow' => ['type' => 'text', 'label' => 'Kis felirat a cím felett'],

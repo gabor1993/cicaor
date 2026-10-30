@@ -1,23 +1,35 @@
 import type { Metadata } from "next";
 import { Carlito, Caveat, Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import { hu } from "@/content/hu";
+import { siteUrl } from "@/lib/build-env";
 import "./globals.css";
 
 // "latin-ext" is required for the Hungarian letters ő and ű.
 // next/font needs literal options at build time, so the subsets cannot be shared via a variable.
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin", "latin-ext"] });
+// The decorative fonts are not preloaded, so they do not compete with the hero photo (the LCP element).
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
+  preload: false,
 });
 // Carlito is built on Lato 2; the Lato served by Google Fonts lacks ő and ű despite "latin-ext".
 const carlito = Carlito({ variable: "--font-carlito", subsets: ["latin", "latin-ext"], weight: ["400", "700"] });
-const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin", "latin-ext"] });
+const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin", "latin-ext"], preload: false });
 
 export const metadata: Metadata = {
-  title: `${hu.brand.name} – ${hu.brand.tagline}`,
+  metadataBase: new URL(siteUrl()),
+  title: hu.seoTitle,
   description: hu.siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "hu_HU",
+    siteName: hu.brand.name,
+    title: hu.seoTitle,
+    description: hu.siteDescription,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: hu.homeHero.imageAlt }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

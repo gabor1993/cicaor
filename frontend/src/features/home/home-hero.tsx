@@ -22,10 +22,13 @@ export function HomeHero() {
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-14 text-[#f6f3ec] sm:px-6 lg:py-16">
-        <p className="text-[0.7rem] font-bold uppercase tracking-[0.35em]">{homeHero.eyebrow}</p>
-        <h1 id="home-hero-title" className="mt-2 flex items-start gap-3 font-display text-6xl leading-none sm:text-7xl">
-          {homeHero.title}
-          <PawPrint aria-hidden className="mt-2 size-7" />
+        {/* The eyebrow is part of the h1, so the main heading also says what and where ("Cicaszitter Budapesten"). */}
+        <h1 id="home-hero-title">
+          <span className="block font-sans text-xs font-bold uppercase tracking-[0.35em]">{homeHero.eyebrow}</span>{" "}
+          <span className="mt-2 flex items-start gap-3 font-display text-6xl leading-none sm:text-7xl">
+            {homeHero.title}
+            <PawPrint aria-hidden className="mt-2 size-7" />
+          </span>
         </h1>
         <p className="mt-4 font-serif text-2xl sm:text-3xl">{homeHero.subtitle}</p>
         <p className="mt-4 max-w-xs text-sm leading-relaxed">{homeHero.body}</p>

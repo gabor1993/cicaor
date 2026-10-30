@@ -6,6 +6,7 @@ import { LegalPage } from "@/features/legal/legal-page";
 export const metadata: Metadata = {
   title: `${privacyPolicy.title} – ${hu.brand.name}`,
   description: privacyPolicy.description,
+  alternates: { canonical: "/adatkezelesi-tajekoztato/" },
 };
 
 export default function PrivacyPolicyPage() {

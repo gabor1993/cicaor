@@ -17,7 +17,7 @@ export function FeatureStrip() {
           return (
             <li key={feature.title} className="flex flex-col items-center px-4 text-center">
               <Icon aria-hidden className="size-7" strokeWidth={1.25} />
-              <h2 className="mt-3 font-serif text-base font-semibold">{feature.title}</h2>
+              <p className="mt-3 font-serif text-base font-semibold">{feature.title}</p>
               <p className="mt-1 max-w-[13rem] text-xs leading-relaxed text-muted">{feature.body}</p>
             </li>
           );

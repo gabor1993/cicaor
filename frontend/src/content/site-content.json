@@ -1,7 +1,8 @@
 {
-  "siteDescription": "CicaŐr – megbízható, szeretetteljes cicaszitter szolgáltatás. A cicád a saját otthonában maradhat, amíg te távol vagy.",
+  "seoTitle": "Cicaszitter Budapesten – CicaŐr",
+  "siteDescription": "Cicaszitter Budapesten: megbízható, szeretetteljes gondoskodás a cicádnak a saját otthonában, amíg te távol vagy. Napi látogatás, több cica, hosszabb távollét.",
   "homeHero": {
-    "eyebrow": "Cicaszitter szolgáltatás",
+    "eyebrow": "Cicaszitter Budapesten",
     "title": "CicaŐr",
     "subtitle": "Mert minden cica különleges.",
     "body": "Megbízható, szeretetteljes gondoskodás a te cicádnak, amíg te távol vagy.",
@@ -35,7 +36,7 @@
   "packages": {
     "eyebrow": "Árak és csomagok",
     "title": "Válaszd ki a számodra ideális gondoskodást!",
-    "subtitle": "Minden csomagunk tartalmazza az alapvető gondoskodást, a szeretetteljes törődést és a rendszeres beszámolót a gazdi számára. 3 napnál hosszabb távollét esetén kedvezőbb napi áron gondoskodunk cicádról.",
+    "subtitle": "Minden csomagom tartalmazza az alapvető gondoskodást, a szeretetteljes törődést és a rendszeres beszámolót a gazdi számára. 3 napnál hosszabb távollét esetén kedvezőbb napi áron gondoskodom a cicádról.",
     "items": [
       {
         "id": "komfort",
@@ -276,7 +277,7 @@
   "faq": {
     "eyebrow": "Gyakori kérdések",
     "title": "Minden, amit tudni szeretnél",
-    "body": "Összegyűjtöttük a leggyakrabban felmerülő kérdéseket, hogy könnyebben dönthess, és nyugodt szívvel bízd rám a cicádat.",
+    "body": "Összegyűjtöttem a leggyakrabban felmerülő kérdéseket, hogy könnyebben dönthess, és nyugodt szívvel bízd rám a cicádat.",
     "image": "/images/faq.webp",
     "imageAlt": "Fekete-fehér cica fekszik egy kötött takarón",
     "items": [

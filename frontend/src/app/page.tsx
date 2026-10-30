@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ContactSection } from "@/features/contact/contact-section";
 import { AboutSection } from "@/features/home/about-section";
 import { ClosingBand } from "@/features/home/closing-band";
@@ -8,10 +9,20 @@ import { ServicesSection } from "@/features/home/services-section";
 import { Footer } from "@/features/layout/footer";
 import { Header } from "@/features/layout/header";
 import { PricingSection } from "@/features/pricing/components/pricing-section";
+import { localBusinessJsonLd, serializeJsonLd } from "@/features/seo/local-business";
+import { siteUrl } from "@/lib/build-env";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(localBusinessJsonLd(siteUrl())) }}
+      />
       <Header />
       <main id="tartalom">
         <HomeHero />

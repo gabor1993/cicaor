@@ -6,6 +6,7 @@ import { LegalPage } from "@/features/legal/legal-page";
 export const metadata: Metadata = {
   title: `${terms.title} – ${hu.brand.name}`,
   description: terms.description,
+  alternates: { canonical: "/aszf/" },
 };
 
 export default function TermsPage() {

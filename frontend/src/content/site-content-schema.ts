@@ -14,7 +14,9 @@ const question = z.object({ q: text, a: text });
 export const packageIds = ["komfort", "moka", "lux"] as const;
 
 export const siteContentSchema = z.object({
-  siteDescription: text,
+  // Search result title and description; Google shows about 60 and 155 characters of them.
+  seoTitle: text.max(70),
+  siteDescription: text.max(200),
   homeHero: z.object({
     eyebrow: text,
     title: text,
