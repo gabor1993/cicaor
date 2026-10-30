@@ -11,6 +11,7 @@ import { Header } from "@/features/layout/header";
 import { PricingSection } from "@/features/pricing/components/pricing-section";
 import { localBusinessJsonLd, serializeJsonLd } from "@/features/seo/local-business";
 import { siteUrl } from "@/lib/build-env";
+import { isDemo } from "@/lib/site-mode";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -19,10 +20,13 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(localBusinessJsonLd(siteUrl())) }}
-      />
+      {/* Structured data would present the demo to Google as a real local business. */}
+      {!isDemo && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(localBusinessJsonLd(siteUrl())) }}
+        />
+      )}
       <Header />
       <main id="tartalom">
         <HomeHero />

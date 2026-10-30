@@ -29,9 +29,11 @@ export function LegalPage({ document }: { document: LegalDocument }) {
               <PawPrint aria-hidden className="mt-2 size-6 shrink-0 text-taupe" />
             </h1>
             <p className="mt-5 max-w-2xl font-serif text-xl leading-snug">{document.intro}</p>
-            <p className="mt-6 text-xs text-muted">
-              {legalUi.effectiveFrom} {legalUi.effectiveDate}
-            </p>
+            {document.effectiveDate && (
+              <p className="mt-6 text-xs text-muted">
+                {legalUi.effectiveFrom} {document.effectiveDate}
+              </p>
+            )}
           </div>
         </header>
 

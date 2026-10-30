@@ -1,19 +1,50 @@
-# CicaŐr
+# CicaŐr – cat sitting website
 
-Website for a cat sitting service.
+A website for CicaŐr, a cat sitting service in Budapest: the sitter visits cats in their own home while the owners are away. The business has not launched yet, so the site currently runs in **demo mode**: it looks and works like the real thing, but nothing can be booked and the contact form sends nothing.
 
-- `/` – single page: hero, highlights, about, services, detailed pricing (`#arak`: packages with 30/60/90 minute visits and daily multi-day rates, collapsible add-ons), FAQ and the contact form. "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the contact form. The gallery and reviews sections are hidden until real content exists.
-- `/adatkezelesi-tajekoztato/` and `/aszf/` – privacy policy and terms, rendered from `frontend/src/content/legal-hu.ts`. Every `[TODO: …]` must be filled in and both texts reviewed by a lawyer before going live.
+**Live demo:** https://cicaor.netlify.app · Built by [GABENIX](https://gabenix.hu)
 
-- `frontend/` – Next.js (App Router, TypeScript strict, Tailwind CSS v4), static export (`output: "export"`).
-- `backend/` – small PHP endpoint (`contact.php`) that validates the contact form and sends an e-mail.
-- `cms/` – headless WordPress plugin (`cicaor-content`) that makes the site's content editable.
+![Home page](docs/screenshots/home.webp)
 
-## Requirements
-- Node.js LTS and npm
-- PHP 8.1+ (the project was tested with 8.3) and Composer
+| Pricing with live duration switch | Mobile | WordPress admin |
+| --- | --- | --- |
+| ![Pricing cards](docs/screenshots/pricing.webp) | ![Mobile home page](docs/screenshots/mobile.webp) | ![Package editor in WordPress](docs/screenshots/cms-package.webp) |
 
-## Frontend
+## Highlights
+
+- **Static Next.js 16 site** (App Router, TypeScript strict, Tailwind CSS v4), exported to plain files and served from Netlify's CDN.
+- **Headless WordPress** with a purpose-built plugin: the owner edits prices, packages, add-ons, FAQ, reviews, texts and images in a familiar admin, and saving triggers a rebuild. The site never calls WordPress at runtime.
+- **One validated contract** between CMS and site: a Zod schema checks every build's content, so a bad edit fails the build instead of breaking the page, and the previous deploy stays live.
+- **PHP contact backend** with server-side validation mirroring the Zod schema, honeypot, per-IP rate limiting, and HTML e-mails over SMTP (PHPMailer) with a plain-text alternative.
+- **Demo/live switch** (`NEXT_PUBLIC_SITE_MODE`): the demo shows a banner, keeps the form local, asks search engines not to index it and replaces the legal pages with an honest notice.
+- **Security by default:** CSP and other security headers, production env validation, escaped e-mail templates and JSON-LD, a hardened CMS (no XML-RPC, no public user list, role-limited editing, build hook URL allow-list).
+- **SEO and accessibility:** metadata, canonical URLs, Open Graph, sitemap, `LocalBusiness` JSON-LD (live mode), semantic headings, skip link, visible focus, labelled form errors, at least 12px text.
+- **Tests** for the pricing logic, the content schema, the CMS image handling, the security headers and env checks (Vitest), and for the PHP validation, e-mail templates and rate limiting.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  editor([Owner]) -->|edits| wp[WordPress + cicaor-content plugin]
+  wp -->|build hook| netlify[Netlify build]
+  netlify -->|"prebuild: fetch content + images, validate with Zod"| wp
+  netlify -->|static files + _headers| cdn[(Netlify CDN)]
+  visitor([Visitor]) --> cdn
+  visitor -->|contact form, live mode only| php[PHP contact endpoint]
+  php -->|SMTP| mail([Owner's mailbox + confirmation])
+```
+
+| Folder | What it is |
+| --- | --- |
+| `frontend/` | Next.js static export. Copy lives in `src/content/` (`hu.ts` for interface text, `site-content.json` for the CMS-owned content), features in `src/features/`. |
+| `backend/` | Plain PHP contact endpoint (`contact.php`) with validation, rate limiting and mail templates. |
+| `cms/` | The `cicaor-content` WordPress plugin and `bundle.php`, which packages it as an uploadable zip with the current content as seed. |
+
+## Getting started
+
+Requirements: Node.js LTS with npm, PHP 8.1+ (tested with 8.3) and Composer.
+
+### Frontend
 
 ```bash
 cd frontend
@@ -28,24 +59,23 @@ npm run typecheck
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_CONTACT_API_URL` | Full URL of `backend/contact.php`. Falls back to `/backend/contact.php`. It is public by design (inlined at build time), so never put secrets in it. |
-| `CMS_URL` | Base URL of the WordPress CMS, e.g. `https://cms.example.hu`. Build-time only, not exposed to the browser. Without it the build uses the committed snapshot. |
+| `NEXT_PUBLIC_SITE_MODE` | `live` turns the real site on. Anything else, including unset, builds the demo. |
 | `SITE_URL` | Public origin, e.g. `https://cicaor.hu`. Used for canonical URLs, the sitemap, `robots.txt`, Open Graph and JSON-LD. Defaults to `http://localhost:3000`. |
+| `NEXT_PUBLIC_CONTACT_API_URL` | Full URL of `backend/contact.php` (live mode). Falls back to `/backend/contact.php`. It is public by design (inlined at build time), so never put secrets in it. |
+| `CMS_URL` | Base URL of the WordPress CMS, e.g. `https://cms.example.hu`. Build-time only. Without it the build uses the committed content snapshot. |
 
-On Netlify's production build (`CONTEXT=production`), `SITE_URL`, `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL` are required and must be `https`; the build stops otherwise (`src/lib/build-env.ts`). After the build, `scripts/write-headers.mts` writes `out/_headers` with the security headers (CSP, framing, referrer and permissions policy); the CSP allows fetches only to the contact backend's origin.
+On Netlify's production build (`CONTEXT=production`) the build stops when a required value is missing or not `https` (`src/lib/build-env.ts`): the demo needs `SITE_URL`, the live site also `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL`. After the build, `scripts/write-headers.mts` writes `out/_headers` with the security headers; the CSP allows fetches only to the contact backend's origin (none in the demo).
 
-Components read all copy through `frontend/src/content/hu.ts`. It holds the fixed interface text and merges in the editable content from `site-content.json`, which the CMS owns.
+### Content (WordPress CMS)
 
-## Content (WordPress CMS)
-
-The public site stays a static export on Netlify. A separate WordPress (for example on a `cms.` subdomain) is only an admin interface:
-
-1. Editors change texts, prices, add-ons, FAQ, reviews and images in WordPress (menu "CicaŐr tartalom").
+1. Editors change texts, prices, add-ons, FAQ, reviews and images in WordPress (menu "CicaŐr tartalom"). Only Editors and Administrators can.
 2. Saving schedules a Netlify build hook call one minute later, so a series of edits triggers one build.
 3. Before every build, `npm run prebuild` (`scripts/pull-cms-content.mts`) fetches `?rest_route=/cicaor/v1/content`, downloads the images into `public/cms/` (resized WebP), validates everything against `src/content/site-content-schema.ts` and writes `src/content/site-content.json`.
 4. Invalid or incomplete content fails the build, and Netlify keeps serving the previous deploy.
 
 Package ids (`komfort`, `moka`, `lux`) and their bookable durations stay in code, because the contact form validation depends on them.
+
+![The "Szövegek és képek" page of the plugin](docs/screenshots/cms-texts.webp)
 
 ```bash
 php cms/bundle.php                                    # cms/dist/cicaor-content.zip with the current content as seed
@@ -54,7 +84,7 @@ CMS_URL=https://cms.example.hu npm run cms:pull       # refresh the snapshot loc
 
 Setting up a new WordPress: install WordPress (PHP 8.3+), upload `cicaor-content.zip` under Plugins → Add New → Upload Plugin, activate it, and use "CicaŐr tartalom → Kezdeti tartalom" once. Under "Beállítások" set the website URL (visitors of the CMS front end are redirected there) and the Netlify build hook. Then set `CMS_URL` in the Netlify environment variables.
 
-## Backend
+### Backend
 
 ```bash
 cd backend
@@ -65,7 +95,7 @@ php tests/mail-template-test.php
 php tests/rate-limit-test.php
 ```
 
-Every enquiry sends two HTML mails (with a plain-text alternative) through SMTP with PHPMailer: a notification to `MAIL_TO` and a confirmation to the visitor. The templates are in `backend/templates/`. The confirmation never repeats the visitor's message, because anyone can type someone else's address into the form.
+Every enquiry sends two HTML mails (with a plain-text alternative) through SMTP: a notification to `MAIL_TO` and a confirmation to the visitor. The confirmation never repeats the visitor's message, because anyone can type someone else's address into the form.
 
 | Variable | Purpose |
 | --- | --- |
@@ -78,18 +108,27 @@ Every enquiry sends two HTML mails (with a plain-text alternative) through SMTP 
 
 Never commit `.env`.
 
-## Deploy checklist
-1. Set `SITE_URL`, `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL` in Netlify's environment variables and let Netlify build from git (the production build refuses to run without them).
-2. Netlify cannot run PHP: host `backend/` on a PHP-capable server, run `composer install --no-dev` there, and make sure `.env`, `composer.*`, `src/`, `templates/`, `tests/`, `vendor/` and `storage/` are not publicly readable (the `.htaccess` files cover Apache).
-3. Set `ALLOWED_ORIGINS` to the exact production origin, `MAIL_DRIVER=smtp` with the SMTP values, and configure SPF/DKIM/DMARC for the sending domain. `MAIL_FROM` must be the mailbox the SMTP login belongs to.
-4. Upload the missing photos in the CMS (about, gallery), fill in the `TODO` texts and social links.
-5. Run `npm test`, `npm run lint`, `npm run build`, `npm audit` and `composer audit`.
+## Going live (checklist)
+
+1. Fill in every `[TODO: …]` in `frontend/src/content/legal-hu.ts` and have both legal texts reviewed by a lawyer.
+2. Set `NEXT_PUBLIC_SITE_MODE=live`, `SITE_URL`, `NEXT_PUBLIC_CONTACT_API_URL` and `CMS_URL` in Netlify's environment variables and let Netlify build from git.
+3. Host `backend/` on a PHP server (Netlify cannot run PHP), run `composer install --no-dev` there, and make sure `.env`, `composer.*`, `src/`, `templates/`, `tests/`, `vendor/` and `storage/` are not publicly readable (the `.htaccess` files cover Apache).
+4. Set `ALLOWED_ORIGINS` to the exact production origin and `MAIL_DRIVER=smtp` with the SMTP values; configure SPF/DKIM/DMARC for the sending domain. `MAIL_FROM` must be the mailbox the SMTP login belongs to.
+5. Upload the missing photos in the CMS (about, gallery), add real reviews and the social links.
+6. Run `npm test`, `npm run lint`, `npm run build`, `npm audit` and `composer audit`.
 
 ## Decisions
+
 - **Typed content file instead of `next-intl`:** the site is Hungarian only, so a typed dictionary avoids an extra dependency. It can be migrated to `next-intl` if more languages are needed.
 - **Headless WordPress, fetched at build time:** the owner wanted a familiar admin interface on the PHP hosting the contact backend needs anyway. Fetching at build time keeps the site static and fast, and the site keeps working when WordPress is down. Images are copied into the build, so the CMS host serves no public traffic.
 - **Own small plugin instead of ACF:** the free ACF has no repeaters or options pages, and a plugin with plain meta boxes has no paid dependency and exposes exactly one read-only endpoint.
 - **Plain PHP endpoint instead of Laravel:** one form does not justify a framework.
-- **URL parameters instead of shared React state for the chosen package:** the pricing cards live on another page, and React context does not survive navigation. The values are validated against the known packages before use.
-- **Light theme only by default:** the design is light. Dark tokens exist behind `data-theme="dark"` but nothing toggles them yet.
+- **URL parameters for the chosen package:** "Kiválasztom" links to `/?csomag=<id>&ido=<minutes>#kapcsolat`, which pre-fills the form, survives a reload and needs no shared client state. The values are validated against the known packages before use.
+- **CSP with `'unsafe-inline'` scripts:** a static export inlines its boot scripts and cannot use per-request nonces. The policy still blocks foreign scripts, framing, plugins and requests to any other host.
+- **Demo mode by default:** the site cannot accidentally go live as a bookable service before the business and its legal texts are ready.
+- **Light theme only:** the design is light. Dark tokens exist behind `data-theme="dark"` but nothing toggles them yet.
 - **Zod on the frontend and manual checks in PHP:** rules are mirrored by hand in `schema.ts` and `validation.php`; keep them in sync.
+
+## License
+
+All rights reserved. The code is published for portfolio purposes; please do not reuse it without permission.

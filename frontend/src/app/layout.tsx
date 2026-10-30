@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Carlito, Caveat, Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import { hu } from "@/content/hu";
+import { DemoBanner } from "@/components/ui/demo-banner";
 import { siteUrl } from "@/lib/build-env";
+import { isDemo } from "@/lib/site-mode";
 import "./globals.css";
 
 // "latin-ext" is required for the Hungarian letters ő and ű.
@@ -30,6 +32,8 @@ export const metadata: Metadata = {
     description: hu.siteDescription,
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: hu.homeHero.imageAlt }],
   },
+  // The demo must not show up in search results as a real, bookable business.
+  robots: isDemo ? { index: false, follow: false } : undefined,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -48,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           {hu.skipToContent}
         </a>
+        <DemoBanner />
         {children}
       </body>
     </html>

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 import { durationsFor, fitDuration, parseSelection, type PackageSelection } from "@/features/pricing/lib/pricing";
+import { isDemo } from "@/lib/site-mode";
 import { contactSchema } from "./schema";
 
 // A package chosen in the pricing section arrives in the URL. useSearchParams needs a Suspense
@@ -19,7 +20,7 @@ function UrlSelectionReader({ onSelect }: { onSelect: (selection: PackageSelecti
 
 const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL ?? "/backend/contact.php";
 
-type Status = "idle" | "sending" | "success" | "error" | "rateLimited";
+type Status = "idle" | "sending" | "success" | "error" | "rateLimited" | "demo";
 type FieldErrors = Partial<Record<string, string>>;
 
 const inputClass =
@@ -57,6 +58,8 @@ export function ContactSection() {
     }
 
     setErrors({});
+    // The demo validates like the real form but never sends personal data anywhere.
+    if (isDemo) return setStatus("demo");
     setStatus("sending");
     try {
       const response = await fetch(endpoint, {
@@ -202,6 +205,7 @@ export function ContactSection() {
             {status === "success" && contact.success}
             {status === "error" && contact.genericError}
             {status === "rateLimited" && contact.rateLimited}
+            {status === "demo" && hu.demo.formSent}
           </p>
         </div>
       </form>

@@ -14,17 +14,20 @@ export type LegalDocument = {
   title: string;
   description: string;
   intro: string;
+  // Left out where no date applies, e.g. on the demo notice.
+  effectiveDate?: string;
   sections: readonly LegalSection[];
 };
 
 export const legalUi = {
   eyebrow: "Jogi információk",
   effectiveFrom: "Hatályos:",
-  effectiveDate: "[TODO: hatálybalépés dátuma]",
   tocLabel: "Tartalom",
   backToTop: "Vissza a tetejére",
   backHome: "Vissza a főoldalra",
 } as const;
+
+const effectiveDate = "[TODO: hatálybalépés dátuma]";
 
 const operator = {
   name: "[TODO: név vagy cégnév]",
@@ -46,6 +49,7 @@ const operatorList = [
 
 export const privacyPolicy: LegalDocument = {
   slug: "adatkezelesi-tajekoztato",
+  effectiveDate,
   title: "Adatkezelési tájékoztató",
   description: "Hogyan kezeli a CicaŐr a weboldalon és a kapcsolatfelvétel során megadott személyes adatokat.",
   intro:
@@ -173,6 +177,7 @@ export const privacyPolicy: LegalDocument = {
 
 export const terms: LegalDocument = {
   slug: "aszf",
+  effectiveDate,
   title: "Általános Szerződési Feltételek",
   description: "A CicaŐr cicaszitter szolgáltatás igénybevételének feltételei: foglalás, árak, lemondás és felelősség.",
   intro:
@@ -280,6 +285,44 @@ export const terms: LegalDocument = {
         "Az ÁSZF-ben nem szabályozott kérdésekben a Polgári Törvénykönyvről szóló 2013. évi V. törvény rendelkezései az irányadók.",
         "A szolgáltató jogosult az ÁSZF-et módosítani. A módosítás a már visszaigazolt foglalásokat nem érinti.",
       ],
+    },
+  ],
+};
+
+// Shown on both legal pages while the site runs in demo mode (src/lib/site-mode.ts). Unlike the documents above,
+// it describes what the demo actually does, so it needs no business details.
+export const demoNotice: LegalDocument = {
+  slug: "bemutato",
+  title: "Jogi tájékoztató",
+  description: "A CicaŐr bemutató oldal: a szolgáltatás még nem rendelhető, és az oldal nem kezel személyes adatot.",
+  intro: "A CicaŐr cicaszitter szolgáltatás még nem indult el. Ez az oldal a weboldal bemutatására szolgál.",
+  sections: [
+    {
+      id: "bemutato",
+      title: "Bemutató oldal",
+      blocks: [
+        "A szolgáltatás jelenleg nem rendelhető, az oldalon szereplő árak és csomagok tájékoztató jellegűek.",
+        "Az Általános Szerződési Feltételek és a teljes adatkezelési tájékoztató a szolgáltatás indulásakor jelennek meg itt.",
+      ],
+    },
+    {
+      id: "adatkezeles",
+      title: "Adatkezelés",
+      blocks: [
+        {
+          list: [
+            "A kapcsolati űrlap a bemutató oldalon nem küld el és nem tárol semmilyen adatot: a beírt szöveg csak a böngésződben marad.",
+            "Az oldal nem használ sütiket, és nem méri a látogatottságot.",
+            "A betűtípusokat az oldal saját szerverről tölti be, így külső betűtípus-szolgáltatóhoz nem jut adat.",
+            "A tárhelyszolgáltató (Netlify, Inc.) a működéshez technikai naplót vezethet, például IP-címmel és időponttal.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "keszito",
+      title: "Az oldal készítője",
+      blocks: ["Az oldalt a GABENIX készítette (gabenix.hu)."],
     },
   ],
 };

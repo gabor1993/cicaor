@@ -22,9 +22,12 @@ export function contentSecurityPolicy(contactApiUrl: string | undefined): string
   ].join("; ");
 }
 
-export function headersFile(contactApiUrl: string | undefined): string {
+export function headersFile({ contactApiUrl, demo }: { contactApiUrl: string | undefined; demo: boolean }): string {
   const headers = {
-    "Content-Security-Policy": contentSecurityPolicy(contactApiUrl),
+    // The demo form sends nothing, so it needs no backend origin.
+    "Content-Security-Policy": contentSecurityPolicy(demo ? undefined : contactApiUrl),
+    // Covers files a meta tag cannot, such as images and robots-visible text files.
+    ...(demo ? { "X-Robots-Tag": "noindex, nofollow" } : {}),
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin",

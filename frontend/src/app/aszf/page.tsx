@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { hu } from "@/content/hu";
-import { terms } from "@/content/legal-hu";
+import { demoNotice, terms } from "@/content/legal-hu";
 import { LegalPage } from "@/features/legal/legal-page";
+import { isDemo } from "@/lib/site-mode";
+
+const document = isDemo ? demoNotice : terms;
 
 export const metadata: Metadata = {
-  title: `${terms.title} – ${hu.brand.name}`,
-  description: terms.description,
+  title: `${document.title} – ${hu.brand.name}`,
+  description: document.description,
   alternates: { canonical: "/aszf/" },
 };
 
 export default function TermsPage() {
-  return <LegalPage document={terms} />;
+  return <LegalPage document={document} />;
 }

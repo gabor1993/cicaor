@@ -24,6 +24,11 @@ export const hu = {
   ...siteContent,
   brand: { name: "CicaŐr", tagline: "Biztonságban a cicád" },
   skipToContent: "Ugrás a tartalomra",
+  // Shown while NEXT_PUBLIC_SITE_MODE is not "live" (see src/lib/site-mode.ts).
+  demo: {
+    banner: "Bemutató oldal: a CicaŐr szolgáltatás még nem rendelhető, az űrlap nem küld üzenetet.",
+    formSent: "Ez egy bemutató oldal, ezért az üzenetet nem küldtem el. Az űrlap ellenőrzése így működne élesben is.",
+  },
   nav: {
     label: "Főmenü",
     footerLabel: "Lábléc menü",
