@@ -14,6 +14,11 @@ function allowRequest(string $ip, int $max, int $windowSeconds): bool
         return true;
     }
 
+    // Roughly every hundredth request clears files of visitors who have not posted within the window.
+    if (random_int(1, 100) === 1) {
+        removeStaleEntries($dir, $windowSeconds);
+    }
+
     // Hash the IP so no raw addresses are stored on disk.
     $file = $dir . '/' . hash('sha256', $ip) . '.json';
     $now = time();
@@ -39,4 +44,13 @@ function allowRequest(string $ip, int $max, int $windowSeconds): bool
     fclose($handle);
 
     return $allowed;
+}
+
+function removeStaleEntries(string $dir, int $windowSeconds): void
+{
+    foreach (glob($dir . '/*.json') ?: [] as $file) {
+        if (filemtime($file) < time() - $windowSeconds) {
+            @unlink($file);
+        }
+    }
 }
