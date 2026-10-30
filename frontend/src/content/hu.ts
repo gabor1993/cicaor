@@ -178,7 +178,7 @@ export const hu = {
         icon: "house",
         title: "Napi látogatás",
         body: "Megetetem a cicádat, friss vizet adok, kitakarítom az almot, és jut idő játékra, simogatásra is. Minden látogatás után fotót és rövid üzenetet küldök.",
-        imageAlt: "Fekete-fehér cica sétál a nyitott ajtó mellett",
+        imageAlt: "Cirmos-fehér cica sétál a nyitott ajtó mellett",
       },
       {
         icon: "cats",
