@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import { validateBuildEnv } from "./src/lib/build-env";
+
+validateBuildEnv(process.env);
 
 const nextConfig: NextConfig = {
   output: "export",
