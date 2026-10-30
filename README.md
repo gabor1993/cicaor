@@ -7,6 +7,7 @@ Website for a cat sitting service.
 
 - `frontend/` – Next.js (App Router, TypeScript strict, Tailwind CSS v4), static export (`output: "export"`).
 - `backend/` – small PHP endpoint (`contact.php`) that validates the contact form and sends an e-mail.
+- `cms/` – headless WordPress plugin (`cicaor-content`) that makes the site's content editable.
 
 ## Requirements
 - Node.js LTS and npm
@@ -28,8 +29,27 @@ npm run typecheck
 | Variable | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_CONTACT_API_URL` | Full URL of `backend/contact.php`. Falls back to `/backend/contact.php`. It is public by design (inlined at build time), so never put secrets in it. |
+| `CMS_URL` | Base URL of the WordPress CMS, e.g. `https://cms.example.hu`. Build-time only, not exposed to the browser. Without it the build uses the committed snapshot. |
 
-All Hungarian copy lives in `frontend/src/content/hu.ts`. Prices marked `TODO` there (30 and 90 minute visits) are placeholders and must be confirmed before launch.
+Components read all copy through `frontend/src/content/hu.ts`. It holds the fixed interface text and merges in the editable content from `site-content.json`, which the CMS owns.
+
+## Content (WordPress CMS)
+
+The public site stays a static export on Netlify. A separate WordPress (for example on a `cms.` subdomain) is only an admin interface:
+
+1. Editors change texts, prices, add-ons, FAQ, reviews and images in WordPress (menu "CicaŐr tartalom").
+2. Saving schedules a Netlify build hook call one minute later, so a series of edits triggers one build.
+3. Before every build, `npm run prebuild` (`scripts/pull-cms-content.mts`) fetches `?rest_route=/cicaor/v1/content`, downloads the images into `public/cms/` (resized WebP), validates everything against `src/content/site-content-schema.ts` and writes `src/content/site-content.json`.
+4. Invalid or incomplete content fails the build, and Netlify keeps serving the previous deploy.
+
+Package ids (`komfort`, `moka`, `lux`) and their bookable durations stay in code, because the contact form validation depends on them.
+
+```bash
+php cms/bundle.php                                    # cms/dist/cicaor-content.zip with the current content as seed
+CMS_URL=https://cms.example.hu npm run cms:pull       # refresh the snapshot locally (from frontend/), then commit it
+```
+
+Setting up a new WordPress: install WordPress (PHP 8.3+), upload `cicaor-content.zip` under Plugins → Add New → Upload Plugin, activate it, and use "CicaŐr tartalom → Kezdeti tartalom" once. Under "Beállítások" set the website URL (visitors of the CMS front end are redirected there) and the Netlify build hook. Then set `CMS_URL` in the Netlify environment variables.
 
 ## Backend
 
@@ -58,11 +78,13 @@ Never commit `.env`.
 1. Build the frontend with the production `NEXT_PUBLIC_CONTACT_API_URL`, upload `frontend/out` to Netlify (or any static host).
 2. Netlify cannot run PHP: host `backend/` on a PHP-capable server, run `composer install --no-dev` there, and make sure `.env`, `composer.*`, `src/`, `templates/`, `tests/`, `vendor/` and `storage/` are not publicly readable (the `.htaccess` files cover Apache).
 3. Set `ALLOWED_ORIGINS` to the exact production origin, `MAIL_DRIVER=smtp` with the SMTP values, and configure SPF/DKIM/DMARC for the sending domain. `MAIL_FROM` must be the mailbox the SMTP login belongs to.
-4. Replace placeholder photos (`PhotoPlaceholder`), `TODO` texts and social links.
+4. Upload the missing photos in the CMS (about, gallery), fill in the `TODO` texts and social links.
 5. Run `npm test`, `npm run lint`, `npm run build`, `npm audit` and `composer audit`.
 
 ## Decisions
 - **Typed content file instead of `next-intl`:** the site is Hungarian only, so a typed dictionary avoids an extra dependency. It can be migrated to `next-intl` if more languages are needed.
+- **Headless WordPress, fetched at build time:** the owner wanted a familiar admin interface on the PHP hosting the contact backend needs anyway. Fetching at build time keeps the site static and fast, and the site keeps working when WordPress is down. Images are copied into the build, so the CMS host serves no public traffic.
+- **Own small plugin instead of ACF:** the free ACF has no repeaters or options pages, and a plugin with plain meta boxes has no paid dependency and exposes exactly one read-only endpoint.
 - **Plain PHP endpoint instead of Laravel:** one form does not justify a framework.
 - **URL parameters instead of shared React state for the chosen package:** the pricing cards live on another page, and React context does not survive navigation. The values are validated against the known packages before use.
 - **Light theme only by default:** the design is light. Dark tokens exist behind `data-theme="dark"` but nothing toggles them yet.
