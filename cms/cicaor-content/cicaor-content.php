@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CicaŐr tartalom
  * Description: Headless content for the CicaŐr website: editable packages, add-ons, FAQ, reviews, texts and images, served as one JSON endpoint and published by a Netlify build hook.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Author: GABENIX
@@ -15,11 +15,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-const CICAOR_VERSION = '1.0.0';
+const CICAOR_VERSION = '1.1.0';
 const CICAOR_FILE = __FILE__;
 const CICAOR_MENU = 'cicaor';
 const CICAOR_TEXTS_OPTION = 'cicaor_texts';
 const CICAOR_SETTINGS_OPTION = 'cicaor_settings';
+// Editing the site content needs the Editor role (edit_pages); technical settings need the Administrator role.
+const CICAOR_EDIT_CAP = 'edit_pages';
 
 require_once __DIR__ . '/includes/fields.php';
 require_once __DIR__ . '/includes/admin.php';

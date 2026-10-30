@@ -42,6 +42,8 @@ function cicaor_register_post_types(): void
             'show_in_menu' => CICAOR_MENU,
             'show_in_rest' => false,
             'supports' => ['title', 'page-attributes'],
+            // Page capabilities: only Editors and Administrators, not Authors or Contributors, may change the site.
+            'capability_type' => 'page',
             'map_meta_cap' => true,
             'capabilities' => !empty($config['fixed']) ? ['create_posts' => 'do_not_allow'] : [],
         ]);
@@ -50,8 +52,8 @@ function cicaor_register_post_types(): void
 
 function cicaor_register_menu(): void
 {
-    add_menu_page('CicaŐr tartalom', 'CicaŐr tartalom', 'edit_posts', CICAOR_MENU, 'cicaor_render_texts_page', 'dashicons-pets', 3);
-    add_submenu_page(CICAOR_MENU, 'Szövegek és képek', 'Szövegek és képek', 'edit_posts', CICAOR_MENU, 'cicaor_render_texts_page');
+    add_menu_page('CicaŐr tartalom', 'CicaŐr tartalom', CICAOR_EDIT_CAP, CICAOR_MENU, 'cicaor_render_texts_page', 'dashicons-pets', 3);
+    add_submenu_page(CICAOR_MENU, 'Szövegek és képek', 'Szövegek és képek', CICAOR_EDIT_CAP, CICAOR_MENU, 'cicaor_render_texts_page');
 }
 
 function cicaor_title_placeholder(string $placeholder, WP_Post $post): string
@@ -159,7 +161,7 @@ function cicaor_texts(): array
 
 function cicaor_render_texts_page(): void
 {
-    if (!current_user_can('edit_posts')) {
+    if (!current_user_can(CICAOR_EDIT_CAP)) {
         return;
     }
     $texts = cicaor_texts();
@@ -186,7 +188,7 @@ function cicaor_render_texts_page(): void
 function cicaor_save_texts(): void
 {
     $nonce = isset($_POST['cicaor_nonce']) ? sanitize_text_field(wp_unslash($_POST['cicaor_nonce'])) : '';
-    if (!wp_verify_nonce($nonce, 'cicaor_save_texts') || !current_user_can('edit_posts')) {
+    if (!wp_verify_nonce($nonce, 'cicaor_save_texts') || !current_user_can(CICAOR_EDIT_CAP)) {
         wp_die('Nincs jogosultságod ehhez a művelethez.', 403);
     }
     $input = isset($_POST['cicaor']) && is_array($_POST['cicaor']) ? $_POST['cicaor'] : [];

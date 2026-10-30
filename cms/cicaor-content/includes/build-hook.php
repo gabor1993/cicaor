@@ -71,7 +71,7 @@ function cicaor_trigger_build(): bool
 function cicaor_build_now(): void
 {
     check_admin_referer('cicaor_build_now', 'cicaor_nonce');
-    if (!current_user_can('edit_posts')) {
+    if (!current_user_can(CICAOR_EDIT_CAP)) {
         wp_die('Nincs jogosultságod ehhez a művelethez.', 403);
     }
     wp_clear_scheduled_hook('cicaor_trigger_build');
