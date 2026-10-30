@@ -4,17 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { CalendarDays, Check, ChevronDown, PawPrint } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
-import { hu, type Duration, type PackageId } from "@/content/hu";
+import { hu, type Duration } from "@/content/hu";
 import { contactLinkFor, durationsFor, formatPrice, priceFor } from "../lib/pricing";
 import { DurationSelector } from "./duration-selector";
 
 type PricingPackage = (typeof hu.packages.items)[number];
-
-const images: Record<PackageId, string> = {
-  komfort: "/images/package-komfort.webp",
-  moka: "/images/package-moka.webp",
-  lux: "/images/package-lux.webp",
-};
 
 export function PricingCard({ pkg }: { pkg: PricingPackage }) {
   const [duration, setDuration] = useState<Duration>(60);
@@ -32,7 +26,7 @@ export function PricingCard({ pkg }: { pkg: PricingPackage }) {
     >
       <div className="relative">
         <Image
-          src={images[pkg.id]}
+          src={pkg.image}
           alt={pkg.imageAlt}
           width={800}
           height={600}

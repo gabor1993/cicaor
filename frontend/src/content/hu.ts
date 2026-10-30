@@ -1,16 +1,28 @@
-// All user-facing copy lives here so components stay free of hardcoded text.
+import { siteContent } from "./site-content";
+import type { packageIds } from "./site-content-schema";
+
+// All user-facing copy is reached through `hu`, so components stay free of hardcoded text.
+// Content editable in WordPress comes from site-content.json; this file only adds the fixed interface copy.
 // Package rates: "base" is the 30-minute price and "step" is added for every further 30 minutes.
 // A package without the 30-minute option keeps its 30-minute base as the starting point of the calculation.
 
 export const durations = [30, 60, 90] as const;
 export type Duration = (typeof durations)[number];
 
-export type PackageId = "komfort" | "moka" | "lux";
+export type PackageId = (typeof packageIds)[number];
+
+// Kept in code, not in the CMS: backend/src/validation.php mirrors these to reject durations a package does not offer.
+const packageDurations: Record<PackageId, readonly Duration[]> = {
+  komfort: [30, 60, 90],
+  moka: [30, 60, 90],
+  lux: [60, 90],
+};
+
+const { packages, addOns, gallery, faq } = siteContent;
 
 export const hu = {
+  ...siteContent,
   brand: { name: "CicaŐr", tagline: "Biztonságban a cicád" },
-  siteDescription:
-    "CicaŐr – megbízható, szeretetteljes cicaszitter szolgáltatás. A cicád a saját otthonában maradhat, amíg te távol vagy.",
   skipToContent: "Ugrás a tartalomra",
   nav: {
     label: "Főmenü",
@@ -27,30 +39,9 @@ export const hu = {
     ],
     contactCta: "Kapcsolatfelvétel",
   },
-  homeHero: {
-    eyebrow: "Cicaszitter szolgáltatás",
-    title: "CicaŐr",
-    subtitle: "Mert minden cica különleges.",
-    body: "Megbízható, szeretetteljes gondoskodás a te cicádnak, amíg te távol vagy.",
-    cta: "Szolgáltatások megtekintése",
-    script: "Boldog cicák, nyugodt gazdik.",
-    imageAlt: "Fekete-fehér cica pihen egy puha takarón",
-  },
-  features: [
-    {
-      icon: "heart",
-      title: "Személyre szabott gondoskodás",
-      body: "Minden cica egyedi, minden igény számít.",
-    },
-    { icon: "shield", title: "Megbízhatóság", body: "Pontosság, felelősség, nyugalom." },
-    { icon: "paw", title: "Tapasztalat", body: "Évek óta macskák között, valódi szeretettel." },
-    { icon: "house", title: "Otthonos környezet", body: "A cicád a saját otthonában maradhat." },
-  ],
   packages: {
-    eyebrow: "Árak és csomagok",
-    title: "Válaszd ki a számodra ideális gondoskodást!",
-    subtitle:
-      "Minden csomagunk tartalmazza az alapvető gondoskodást, a szeretetteljes törődést és a rendszeres beszámolót a gazdi számára. 3 napnál hosszabb távollét esetén kedvezőbb napi áron gondoskodunk cicádról.",
+    ...packages,
+    items: packages.items.map((pkg) => ({ ...pkg, durations: packageDurations[pkg.id] })),
     durationLabel: "Látogatás hossza",
     minutes: "perc",
     perVisit: "/ látogatás",
@@ -58,59 +49,6 @@ export const hu = {
     select: "Kiválasztom",
     bookable: "Foglalható időtartam:",
     features: "Mit tartalmaz?",
-    items: [
-      {
-        id: "komfort",
-        label: "Alapcsomag",
-        name: "CicaKomfort",
-        tagline: "Az alapvető szükségletek biztonságban.",
-        durations: [30, 60, 90],
-        visitRate: { base: 4000, step: 3000 },
-        multiDayRate: { base: 3500, step: 1500 },
-        features: [
-          "Etetés, friss víz",
-          "Alomtisztítás",
-          "Simogatás, törődés",
-          "Rövid beszámoló fotóval",
-        ],
-        popular: false,
-        imageAlt: "Fekete-fehér cica pihen egy puha, világos takarón",
-      },
-      {
-        id: "moka",
-        label: "Komplett csomag",
-        name: "CicaMóka",
-        tagline: "Több idő, több figyelem, több közös játék.",
-        durations: [30, 60, 90],
-        visitRate: { base: 5000, step: 3000 },
-        multiDayRate: { base: 4500, step: 1500 },
-        features: [
-          "Minden, ami a CicaKomfort csomagban van",
-          "Játék és foglalkozás",
-          "Fotók vagy videók a cicáról",
-          "Részletesebb napi beszámoló",
-        ],
-        popular: true,
-        imageAlt: "Fekete-fehér cica egy fa játéklabdát figyel",
-      },
-      {
-        id: "lux",
-        label: "Prémium csomag",
-        name: "CicaLux",
-        tagline: "Több társaság, több nyugalom.",
-        durations: [60, 90],
-        visitRate: { base: 6000, step: 3000 },
-        multiDayRate: { base: 5000, step: 1500 },
-        features: [
-          "Minden, ami a CicaMóka csomagban van",
-          "Több játék és foglalkozás",
-          "Növénylocsolás, levél- és csomagátvétel (megbeszélés szerint)",
-          "Részletesebb beszámoló és több fénykép",
-        ],
-        popular: false,
-        imageAlt: "Fekete-fehér cica heverészik egy puha, mályvaszínű takarón",
-      },
-    ],
   },
   multiDay: {
     label: "3 napnál hosszabb távollétre:",
@@ -118,180 +56,21 @@ export const hu = {
     visitsPerDay: "(1 látogatás/nap)",
   },
   addOns: {
-    eyebrow: "Felárak",
-    title: "Kiegészítő szolgáltatások",
-    subtitle: "Az alábbi felárak a csomagárakon felül értendők.",
-    items: [
-      {
-        id: "extra-cat",
-        icon: "cat",
-        name: "További cica",
-        price: "+1 000 Ft",
-        unit: "/ látogatás",
-        note: "Minden további cica külön felárral vehető igénybe.",
-      },
-      {
-        id: "weekend",
-        icon: "calendar",
-        name: "Hétvége és ünnepnap",
-        price: "+1 500 Ft",
-        unit: "/ látogatás",
-        note: "Szombat, vasárnap és ünnepnapokon.",
-      },
-      {
-        id: "travel",
-        icon: "map-pin",
-        name: "Kiszállás / távolság",
-        price: "0 – 1 500 Ft",
-        unit: "/ látogatás",
-        note: "Budapest belső kerületeiben díjmentes, a külső kerületekben egységesen 1 500 Ft.",
-      },
-      {
-        id: "urgent",
-        icon: "zap",
-        name: "Sürgős foglalás",
-        price: "+1 000 Ft",
-        unit: "/ látogatás",
-        note: "24 órán belüli foglalás esetén.",
-      },
-      {
-        id: "twice-daily",
-        icon: "repeat",
-        name: "Napi 2 látogatás",
-        price: "+30%",
-        unit: "/ látogatás",
-        note: "Napi két látogatásnál a választott időtartam ára 30%-kal nő.",
-      },
-      {
-        id: "key-handover",
-        icon: "key",
-        name: "Külön kulcsátadás",
-        price: "+2 000 Ft",
-        unit: "/ alkalom",
-        note: "Ha a kulcs átadása vagy visszavétele nem az ismerkedő találkozón vagy egy látogatással együtt történik.",
-      },
-    ],
+    ...addOns,
     show: "Felárak megjelenítése",
     hide: "Felárak elrejtése",
   },
-  about: {
-    eyebrow: "Rólam",
-    titleLines: ["Szívvel-lélekkel", "a cicákért"],
-    body: "Gyerekkorom óta rajongok a cicákért, így számomra ez nem csak egy szolgáltatás, hanem hivatás. Fontos számomra, hogy minden cica biztonságban, szeretetben és a saját környezetében érezze magát, amíg te távol vagy.",
-    points: [
-      "Felelősségteljesen és pontosan dolgozom",
-      "Rendszeres fotókkal és üzenetekkel tartom a kapcsolatot",
-      "Minden cicához egyéni figyelmet és gondoskodást biztosítok",
-    ],
-    script: "A cicák mosolyt csalnak az életbe.",
-    quote: "„Nem csak egy állat, hanem egy családtag.”",
-    imageAlt: "Mosolygó cicaszitter átöleli a cirmos cicát",
-    quoteImageAlt: "Fekete-fehér cica arca közelről, meleg fényben",
-  },
-  services: {
-    eyebrow: "Szolgáltatások",
-    title: "Miben tudok segíteni?",
-    subtitle: "Amíg távol vagy, a cicád a saját otthonában marad – én megyek hozzá.",
-    items: [
-      {
-        icon: "house",
-        title: "Napi látogatás",
-        body: "Megetetem a cicádat, friss vizet adok, kitakarítom az almot, és jut idő játékra, simogatásra is. Minden látogatás után fotót és rövid üzenetet küldök.",
-        imageAlt: "Cirmos-fehér cica sétál a nyitott ajtó mellett",
-      },
-      {
-        icon: "cats",
-        title: "Több cica egy otthonban",
-        body: "Ha több cicád van, mindegyikre külön figyelek: a saját tálja, a saját tempója, a saját kedvenc játéka. Az etetést és az esetleges gyógyszerezést előre egyeztetjük.",
-        imageAlt: "Két fekete-fehér cica orrot érint az ablak előtt",
-      },
-      {
-        icon: "calendar",
-        title: "Hosszabb távollét",
-        body: "Egy hosszabb utazás alatt is minden nap ott vagyok, így a cicád megszokott környezetben, nyugodtan vár haza. Többnapos távollétre kedvezőbb csomagokat kínálok.",
-        imageAlt: "Fekete-fehér cica pihen egy kötött takarón",
-      },
-    ],
-  },
   gallery: {
-    eyebrow: "Galéria",
-    titleLines: ["Egy kis betekintés", "a mindennapokba"],
-    body: "Képek a cicákról, akikről már gondoskodtam.",
-    cta: "Megnézem a galériát",
-    imageAlt: "Cirmos cica pihen a takarón",
+    ...gallery,
     openImage: "Kép megnyitása nagyban",
     close: "Bezárás",
     previous: "Előző kép",
     next: "Következő kép",
-    items: [
-      "Cica a kanapén",
-      "Cica az ablakban",
-      "Cica a teraszajtónál",
-      "Két cica pihen",
-      "Játék közben",
-      "Szundikáló cica",
-      "Reggeli simogatás",
-      "Új barátok",
-    ],
-  },
-  reviews: {
-    eyebrow: "Vélemények",
-    title: "Mit mondanak a gazdik?",
-    items: [
-      { quote: "TODO: Valódi vélemény érkezik ide.", author: "Gazdi neve" },
-      { quote: "TODO: Valódi vélemény érkezik ide.", author: "Gazdi neve" },
-      { quote: "TODO: Valódi vélemény érkezik ide.", author: "Gazdi neve" },
-    ],
   },
   faq: {
-    eyebrow: "Gyakori kérdések",
-    title: "Minden, amit tudni szeretnél",
-    body: "Összegyűjtöttük a leggyakrabban felmerülő kérdéseket, hogy könnyebben dönthess, és nyugodt szívvel bízd rám a cicádat.",
+    ...faq,
     showAll: "Teljes kérdéssor",
     showLess: "Kevesebb kérdés",
-    imageAlt: "Fekete-fehér cica fekszik egy kötött takarón",
-    items: [
-      {
-        q: "Melyik csomagot válasszam?",
-        a: "Ha csak az alapellátásra van szükség, a CicaKomfort elegendő. Ha a cicád szereti a játékot és a társaságot, a CicaMóka a legjobb választás. A CicaLux akkor éri meg igazán, ha a cicád mellett növényeket is kell locsolni, vagy levelet, csomagot vársz.",
-      },
-      {
-        q: "Meddig előre érdemes foglalni?",
-        a: "Érdemes legalább 1–2 héttel előre jelezni, iskolai szünetek és ünnepek idején még korábban. Ha sürgős, írj bátran: ha van szabad időpontom, megoldjuk.",
-      },
-      {
-        q: "Mi történik, ha a cicám beteg vagy különleges ellátást igényel?",
-        a: "Szívesen adok gyógyszert vagy követek speciális étrendet a megbeszéltek szerint. Előre egyeztetjük a teendőket és az állatorvos elérhetőségét, hogy szükség esetén azonnal intézkedni tudjak.",
-      },
-      {
-        q: "Hogyan zajlik a kapcsolat a látogatások alatt?",
-        a: "Minden látogatás után fotót és rövid üzenetet küldök arról, hogy van a cicád. Ha bármi szokatlant tapasztalok, azonnal jelzem.",
-      },
-      {
-        q: "Milyen felszerelést biztosítok?",
-        a: "Az eledelt, az almot és a megszokott játékokat te biztosítod, hogy a cicád semmiben ne lássa a változást. A takarításhoz szükséges eszközöket én hozom.",
-      },
-      {
-        q: "Hány cicára tudok vigyázni egyszerre?",
-        a: "Egy háztartásban legfeljebb 3 cicáról gondoskodom egy látogatás alatt. Ennél több cica esetén kérj egyedi ajánlatot.",
-      },
-    ],
-    // Shown after "Teljes kérdéssor" is pressed.
-    moreItems: [
-      {
-        q: "Hogyan történik a kulcsátadás?",
-        a: "A kulcsot az ismerkedő találkozón veszem át, és a megbeszélt módon adom vissza. A kulcson nem szerepel a címed, és senkinek nem adom tovább.",
-      },
-      {
-        q: "Van lehetőség ismerkedő találkozóra az első látogatás előtt?",
-        a: "Igen, az első látogatás előtt ingyenesen ellátogatok hozzátok, hogy megismerjem a cicádat, és átbeszéljük a teendőket.",
-      },
-    ],
-  },
-  closing: {
-    title: "Készen állsz a következő nyaralásra?",
-    body: "Vedd fel velem a kapcsolatot, és beszéljük meg a részleteket!",
-    cta: "Kapcsolatfelvétel",
   },
   contact: {
     eyebrow: "Kapcsolat",

@@ -8,7 +8,7 @@ type PhotoPlaceholderProps = {
   className?: string;
 };
 
-// Stand-in until real photos are added to public/images (then swap for next/image).
+// Stand-in until a real photo is uploaded in the CMS (see Photo).
 // Warm tones echo the photos in the design.
 const tones: Record<Tone, string> = {
   0: "from-[#cdb89a] via-[#a68a6c] to-[#6e5a45]",

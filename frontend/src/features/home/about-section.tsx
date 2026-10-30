@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Check, Heart, PawPrint } from "lucide-react";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
+import { Photo } from "@/components/ui/photo";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 
@@ -10,7 +10,13 @@ export function AboutSection() {
   return (
     <section id="rolam" aria-labelledby="about-title" className="px-4 sm:px-6">
       <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1.5fr_1.4fr_auto_1fr] lg:gap-6">
-        <PhotoPlaceholder alt={about.imageAlt} tone={0} className="aspect-[4/3] w-full" />
+        <Photo
+          src={about.image}
+          alt={about.imageAlt}
+          sizes="(min-width: 1024px) 30vw, 100vw"
+          tone={0}
+          className="aspect-[4/3] w-full"
+        />
 
         <div className="lg:pl-4">
           <Eyebrow>{about.eyebrow}</Eyebrow>
@@ -37,7 +43,7 @@ export function AboutSection() {
 
         <figure className="overflow-hidden bg-band">
           <Image
-            src="/images/about-quote.webp"
+            src={about.quoteImage}
             alt={about.quoteImageAlt}
             width={800}
             height={600}

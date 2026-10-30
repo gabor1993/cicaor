@@ -15,7 +15,7 @@ export function FaqSection() {
     <section id="gyik" aria-labelledby="faq-title" className="px-4 py-4 sm:px-6">
       <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-12">
         <Image
-          src="/images/faq.webp"
+          src={faq.image}
           alt={faq.imageAlt}
           width={640}
           height={384}

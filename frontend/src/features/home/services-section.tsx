@@ -11,12 +11,6 @@ const icons: Record<ServiceKey, LucideIcon> = {
   calendar: CalendarDays,
 };
 
-const images: Record<ServiceKey, string> = {
-  house: "/images/service-daily-visit.webp",
-  cats: "/images/service-multiple-cats.webp",
-  calendar: "/images/service-long-absence.webp",
-};
-
 export function ServicesSection() {
   const { services } = hu;
 
@@ -38,7 +32,7 @@ export function ServicesSection() {
               className="flex w-full flex-col border border-line bg-card sm:w-[calc(50%-0.5rem)] lg:w-[calc((100%-2rem)/3)]"
             >
               <Image
-                src={images[item.icon]}
+                src={item.image}
                 alt={item.imageAlt}
                 width={800}
                 height={533}

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
+import { Photo } from "@/components/ui/photo";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { hu } from "@/content/hu";
 
@@ -31,10 +31,12 @@ export function GalleryBand() {
   return (
     <section id="galeria" aria-labelledby="gallery-title" className="relative isolate overflow-hidden bg-band">
       {/* Photo on the left fading into the band, like in the design. */}
-      <PhotoPlaceholder
+      <Photo
+        src={gallery.image}
         alt={gallery.imageAlt}
+        sizes="30vw"
         tone={0}
-        className="absolute inset-y-0 left-0 -z-10 hidden w-[30%] md:flex"
+        className="absolute inset-y-0 left-0 -z-10 hidden h-full w-[30%] md:flex"
       />
       <div aria-hidden className="absolute inset-y-0 left-[18%] -z-10 hidden w-[14%] bg-gradient-to-r from-transparent to-band md:block" />
 
@@ -72,13 +74,15 @@ export function GalleryBand() {
                 <button
                   type="button"
                   onClick={() => open(index)}
-                  aria-label={`${gallery.openImage}: ${gallery.items[index]}`}
+                  aria-label={`${gallery.openImage}: ${gallery.items[index].caption}`}
                   className="block w-full overflow-hidden"
                 >
-                  <PhotoPlaceholder
-                    alt={gallery.items[index]}
+                  <Photo
+                    src={gallery.items[index].image}
+                    alt={gallery.items[index].caption}
+                    sizes="(min-width: 1024px) 15vw, 30vw"
                     tone={toneFor(index)}
-                    className="aspect-[5/4] transition hover:scale-105"
+                    className="aspect-[5/4] w-full transition hover:scale-105"
                   />
                 </button>
               </li>
@@ -93,7 +97,7 @@ export function GalleryBand() {
       {/* A native modal <dialog> traps focus and closes on Esc without extra code. */}
       <dialog
         ref={dialogRef}
-        aria-label={gallery.items[current]}
+        aria-label={gallery.items[current].caption}
         className="m-auto w-[min(92vw,44rem)] bg-[#24271d] p-4 text-[#f6f3ec] backdrop:bg-black/80"
       >
         <div className="flex justify-end">
@@ -105,14 +109,20 @@ export function GalleryBand() {
           <button type="button" aria-label={gallery.previous} onClick={() => setCurrent(wrap(current - 1))} className="p-1">
             <ChevronLeft aria-hidden />
           </button>
-          <PhotoPlaceholder alt={gallery.items[current]} tone={toneFor(current)} className="aspect-[4/3] flex-1" />
+          <Photo
+            src={gallery.items[current].image}
+            alt={gallery.items[current].caption}
+            sizes="(min-width: 768px) 44rem, 92vw"
+            tone={toneFor(current)}
+            className="aspect-[4/3] min-w-0 flex-1"
+          />
           <button type="button" aria-label={gallery.next} onClick={() => setCurrent(wrap(current + 1))} className="p-1">
             <ChevronRight aria-hidden />
           </button>
         </div>
         <div className="mt-3 flex items-end justify-between px-10 text-xs">
           <p>
-            <span className="block text-sm">{gallery.items[current]}</span>
+            <span className="block text-sm">{gallery.items[current].caption}</span>
             <span className="opacity-70">
               © {new Date().getFullYear()} {brand.name}
             </span>

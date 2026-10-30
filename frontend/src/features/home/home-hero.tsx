@@ -10,7 +10,7 @@ export function HomeHero() {
     <section aria-labelledby="home-hero-title" className="relative isolate overflow-hidden lg:flex lg:min-h-[min(42vw,720px)] lg:items-center">
       {/* The hero photo is the LCP element, so it loads eagerly with high priority. */}
       <Image
-        src="/images/hero.webp"
+        src={homeHero.image}
         alt={homeHero.imageAlt}
         fill
         sizes="100vw"
